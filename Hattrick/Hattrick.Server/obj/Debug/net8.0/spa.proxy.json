@@ -1,0 +1,10 @@
+{
+"SpaProxyServer": {
+"ServerUrl": "https://localhost:5173",
+"RedirectUrl": "",
+"LaunchCommand": "npm run dev",
+"WorkingDirectory": "C:\\Users\\anter\\OneDrive\\Desktop\\Github\\HattrickTask2024\\Hattrick\\Hattrick.Server\\..\\hattrick.client",
+"MaxTimeoutInSeconds": "120",
+"KeepRunning": "false"
+}
+}

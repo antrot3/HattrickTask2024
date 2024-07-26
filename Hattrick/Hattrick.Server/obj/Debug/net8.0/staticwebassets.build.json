@@ -1,0 +1,23 @@
+{
+  "Version": 1,
+  "Hash": "1vS3/8u/KLVoF6VKlsY+YPBToik7dvDCx/TnU8OxDPY=",
+  "Source": "Hattrick.Server",
+  "BasePath": "_content/Hattrick.Server",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [
+    {
+      "Identity": "C:\\Users\\anter\\OneDrive\\Desktop\\Github\\HattrickTask2024\\Hattrick\\hattrick.client\\hattrick.client.esproj",
+      "Version": 2,
+      "Source": "hattrick.client",
+      "GetPublishAssetsTargets": "GetCurrentProjectPublishStaticWebAssetItems",
+      "AdditionalPublishProperties": "",
+      "AdditionalPublishPropertiesToRemove": "WebPublishProfileFile;TargetFramework;RuntimeIdentifier;SelfContained",
+      "GetBuildAssetsTargets": "GetCurrentProjectBuildStaticWebAssetItems",
+      "AdditionalBuildProperties": "",
+      "AdditionalBuildPropertiesToRemove": "WebPublishProfileFile;TargetFramework;RuntimeIdentifier;SelfContained"
+    }
+  ],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}

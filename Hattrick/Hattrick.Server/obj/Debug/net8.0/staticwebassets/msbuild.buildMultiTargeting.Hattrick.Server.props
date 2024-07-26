@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\build\Hattrick.Server.props" />
+</Project>
