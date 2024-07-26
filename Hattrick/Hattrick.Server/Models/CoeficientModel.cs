@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Hattrick.Server.Models
 {
-    public class ChancesModel
+    public class CoeficientModel
     {
         [Key]
         public int Id { get; set; }
@@ -12,7 +12,7 @@ namespace Hattrick.Server.Models
         public MatchModel Match { get; set; }
         [ForeignKey("BetType")]
         public int BetTypeId { get; set; }
-        public BetTypeModel BetTypeModel { get; set; }
+        public BetTypeModel BetType { get; set; }
         public decimal OddValue { get; set; }
     }
 }

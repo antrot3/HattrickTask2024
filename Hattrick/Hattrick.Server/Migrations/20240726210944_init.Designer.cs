@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Hattrick.Server.Migrations
 {
     [DbContext(typeof(HattrickDbContext))]
-    [Migration("20240726181837_init")]
+    [Migration("20240726210944_init")]
     partial class init
     {
         /// <inheritdoc />
@@ -46,7 +46,7 @@ namespace Hattrick.Server.Migrations
                     b.ToTable("BetTypes");
                 });
 
-            modelBuilder.Entity("Hattrick.Server.Models.ChancesModel", b =>
+            modelBuilder.Entity("Hattrick.Server.Models.CoeficientModel", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -57,9 +57,6 @@ namespace Hattrick.Server.Migrations
                     b.Property<int>("BetTypeId")
                         .HasColumnType("int");
 
-                    b.Property<int>("BetTypeModelId")
-                        .HasColumnType("int");
-
                     b.Property<int>("MatchId")
                         .HasColumnType("int");
 
@@ -68,11 +65,11 @@ namespace Hattrick.Server.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("BetTypeModelId");
+                    b.HasIndex("BetTypeId");
 
                     b.HasIndex("MatchId");
 
-                    b.ToTable("Odds");
+                    b.ToTable("coeficient");
                 });
 
             modelBuilder.Entity("Hattrick.Server.Models.MatchModel", b =>
@@ -190,12 +187,15 @@ namespace Hattrick.Server.Migrations
 
                     MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("Condition")
+                    b.Property<string>("ConditionDescription")
                         .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<int>("MatchId")
                         .HasColumnType("int");
+
+                    b.Property<decimal>("OddValue")
+                        .HasColumnType("decimal(65,30)");
 
                     b.HasKey("Id");
 
@@ -252,11 +252,11 @@ namespace Hattrick.Server.Migrations
                     b.ToTable("WalletTransactions");
                 });
 
-            modelBuilder.Entity("Hattrick.Server.Models.ChancesModel", b =>
+            modelBuilder.Entity("Hattrick.Server.Models.CoeficientModel", b =>
                 {
-                    b.HasOne("Hattrick.Server.Models.BetTypeModel", "BetTypeModel")
+                    b.HasOne("Hattrick.Server.Models.BetTypeModel", "BetType")
                         .WithMany()
-                        .HasForeignKey("BetTypeModelId")
+                        .HasForeignKey("BetTypeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -266,7 +266,7 @@ namespace Hattrick.Server.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("BetTypeModel");
+                    b.Navigation("BetType");
 
                     b.Navigation("Match");
                 });

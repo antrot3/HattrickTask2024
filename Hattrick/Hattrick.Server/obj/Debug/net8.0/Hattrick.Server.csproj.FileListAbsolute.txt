@@ -105,3 +105,4 @@ C:\Users\anter\OneDrive\Desktop\Github\HattrickTask2024\Hattrick\Hattrick.Server
 C:\Users\anter\OneDrive\Desktop\Github\HattrickTask2024\Hattrick\Hattrick.Server\obj\Debug\net8.0\Hattrick.Server.pdb
 C:\Users\anter\OneDrive\Desktop\Github\HattrickTask2024\Hattrick\Hattrick.Server\obj\Debug\net8.0\Hattrick.Server.genruntimeconfig.cache
 C:\Users\anter\OneDrive\Desktop\Github\HattrickTask2024\Hattrick\Hattrick.Server\obj\Debug\net8.0\ref\Hattrick.Server.dll
+C:\Users\anter\OneDrive\Desktop\Github\HattrickTask2024\Hattrick\Hattrick.Server\obj\Debug\net8.0\Hattrick.Server.sourcelink.json

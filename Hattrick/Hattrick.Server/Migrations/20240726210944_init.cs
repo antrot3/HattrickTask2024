@@ -137,27 +137,26 @@ namespace Hattrick.Server.Migrations
                 .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
-                name: "Odds",
+                name: "coeficient",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     MatchId = table.Column<int>(type: "int", nullable: false),
                     BetTypeId = table.Column<int>(type: "int", nullable: false),
-                    BetTypeModelId = table.Column<int>(type: "int", nullable: false),
                     OddValue = table.Column<decimal>(type: "decimal(65,30)", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Odds", x => x.Id);
+                    table.PrimaryKey("PK_coeficient", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Odds_BetTypes_BetTypeModelId",
-                        column: x => x.BetTypeModelId,
+                        name: "FK_coeficient_BetTypes_BetTypeId",
+                        column: x => x.BetTypeId,
                         principalTable: "BetTypes",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Odds_Matches_MatchId",
+                        name: "FK_coeficient_Matches_MatchId",
                         column: x => x.MatchId,
                         principalTable: "Matches",
                         principalColumn: "Id",
@@ -172,7 +171,8 @@ namespace Hattrick.Server.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     MatchId = table.Column<int>(type: "int", nullable: false),
-                    Condition = table.Column<string>(type: "longtext", nullable: false)
+                    OddValue = table.Column<decimal>(type: "decimal(65,30)", nullable: false),
+                    ConditionDescription = table.Column<string>(type: "longtext", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4")
                 },
                 constraints: table =>
@@ -223,19 +223,19 @@ namespace Hattrick.Server.Migrations
                 .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateIndex(
+                name: "IX_coeficient_BetTypeId",
+                table: "coeficient",
+                column: "BetTypeId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_coeficient_MatchId",
+                table: "coeficient",
+                column: "MatchId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Matches_SportId",
                 table: "Matches",
                 column: "SportId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Odds_BetTypeModelId",
-                table: "Odds",
-                column: "BetTypeModelId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Odds_MatchId",
-                table: "Odds",
-                column: "MatchId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_TicketBets_BetTypeId",
@@ -266,13 +266,16 @@ namespace Hattrick.Server.Migrations
                 name: "IX_WalletTransactions_UserId",
                 table: "WalletTransactions",
                 column: "UserId");
+
+            var sqlFile = Path.Combine("MIgrations/Scripts/PopulateTestData.Sql");
+            migrationBuilder.Sql(File.ReadAllText(sqlFile));
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Odds");
+                name: "coeficient");
 
             migrationBuilder.DropTable(
                 name: "TicketBets");
