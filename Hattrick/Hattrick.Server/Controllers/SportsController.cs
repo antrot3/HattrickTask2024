@@ -1,18 +1,25 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Hattrick.Server.Models;
+using Microsoft.AspNetCore.Mvc;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace Hattrick.Server.Controllers
 {
-    [Route("api/[controller]")]
     [ApiController]
-    public class Sports : ControllerBase
+    [Route("[controller]")]
+    public class SportsController : ControllerBase
     {
+        public HattrickDbContext _context { get; set; }
+        public SportsController(HattrickDbContext context)
+        {
+            _context = context;
+        }
+
         // GET: api/<Sports>
         [HttpGet]
-        public IEnumerable<string> Get()
+        public IEnumerable<Sport> Get()
         {
-            return new string[] { "value1", "value2" };
+           return _context.Sports.ToList();
         }
 
         // GET api/<Sports>/5
@@ -26,6 +33,8 @@ namespace Hattrick.Server.Controllers
         [HttpPost]
         public void Post([FromBody] string value)
         {
+            _context.Sports.Add(new Models.Sport { Name = value });
+            _context.SaveChanges();
         }
 
         // PUT api/<Sports>/5

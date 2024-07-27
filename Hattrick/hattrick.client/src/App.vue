@@ -1,10 +1,13 @@
 <script setup lang="ts">
     import { ref, computed } from 'vue'
     import HomePage from './components/HomePage.vue'
+    import NewSports from './components/NewSports.vue'
     import UserProfile from './components/UserProfile.vue'
+
 
     const routes = {
         '/': HomePage,
+        '/newSport': NewSports,
         '/userProfile': UserProfile
     }
 
@@ -20,6 +23,9 @@
 </script>
 <template>
     <a href="#/">Home</a> |
+    <a href="#/newSport">Add New sport</a> |
+    <a href="#/userProfile">Add New mathch with odds</a> |
+    <a href="#/userProfile">Add new special offer</a> |
     <a href="#/userProfile">UserProfile</a> |
     <header>
         <div class="wrapper">

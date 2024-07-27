@@ -1,6 +1,8 @@
 C:\Users\anter\OneDrive\Desktop\Github\HattrickTask2024\Hattrick\Hattrick.Server\bin\Debug\net8.0\spa.proxy.json
 C:\Users\anter\OneDrive\Desktop\Github\HattrickTask2024\Hattrick\Hattrick.Server\bin\Debug\net8.0\appsettings.Development.json
 C:\Users\anter\OneDrive\Desktop\Github\HattrickTask2024\Hattrick\Hattrick.Server\bin\Debug\net8.0\appsettings.json
+C:\Users\anter\OneDrive\Desktop\Github\HattrickTask2024\Hattrick\Hattrick.Server\bin\Debug\net8.0\package-lock.json
+C:\Users\anter\OneDrive\Desktop\Github\HattrickTask2024\Hattrick\Hattrick.Server\bin\Debug\net8.0\package.json
 C:\Users\anter\OneDrive\Desktop\Github\HattrickTask2024\Hattrick\Hattrick.Server\bin\Debug\net8.0\Hattrick.Server.exe
 C:\Users\anter\OneDrive\Desktop\Github\HattrickTask2024\Hattrick\Hattrick.Server\bin\Debug\net8.0\Hattrick.Server.deps.json
 C:\Users\anter\OneDrive\Desktop\Github\HattrickTask2024\Hattrick\Hattrick.Server\bin\Debug\net8.0\Hattrick.Server.runtimeconfig.json
@@ -91,6 +93,7 @@ C:\Users\anter\OneDrive\Desktop\Github\HattrickTask2024\Hattrick\Hattrick.Server
 C:\Users\anter\OneDrive\Desktop\Github\HattrickTask2024\Hattrick\Hattrick.Server\obj\Debug\net8.0\Hattrick.Server.csproj.CoreCompileInputs.cache
 C:\Users\anter\OneDrive\Desktop\Github\HattrickTask2024\Hattrick\Hattrick.Server\obj\Debug\net8.0\Hattrick.Server.MvcApplicationPartsAssemblyInfo.cs
 C:\Users\anter\OneDrive\Desktop\Github\HattrickTask2024\Hattrick\Hattrick.Server\obj\Debug\net8.0\Hattrick.Server.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\anter\OneDrive\Desktop\Github\HattrickTask2024\Hattrick\Hattrick.Server\obj\Debug\net8.0\Hattrick.Server.sourcelink.json
 C:\Users\anter\OneDrive\Desktop\Github\HattrickTask2024\Hattrick\Hattrick.Server\obj\Debug\net8.0\staticwebassets.build.json
 C:\Users\anter\OneDrive\Desktop\Github\HattrickTask2024\Hattrick\Hattrick.Server\obj\Debug\net8.0\staticwebassets.development.json
 C:\Users\anter\OneDrive\Desktop\Github\HattrickTask2024\Hattrick\Hattrick.Server\obj\Debug\net8.0\staticwebassets\msbuild.Hattrick.Server.Microsoft.AspNetCore.StaticWebAssets.props
@@ -105,6 +108,3 @@ C:\Users\anter\OneDrive\Desktop\Github\HattrickTask2024\Hattrick\Hattrick.Server
 C:\Users\anter\OneDrive\Desktop\Github\HattrickTask2024\Hattrick\Hattrick.Server\obj\Debug\net8.0\Hattrick.Server.pdb
 C:\Users\anter\OneDrive\Desktop\Github\HattrickTask2024\Hattrick\Hattrick.Server\obj\Debug\net8.0\Hattrick.Server.genruntimeconfig.cache
 C:\Users\anter\OneDrive\Desktop\Github\HattrickTask2024\Hattrick\Hattrick.Server\obj\Debug\net8.0\ref\Hattrick.Server.dll
-C:\Users\anter\OneDrive\Desktop\Github\HattrickTask2024\Hattrick\Hattrick.Server\obj\Debug\net8.0\Hattrick.Server.sourcelink.json
-C:\Users\anter\OneDrive\Desktop\Github\HattrickTask2024\Hattrick\Hattrick.Server\bin\Debug\net8.0\package-lock.json
-C:\Users\anter\OneDrive\Desktop\Github\HattrickTask2024\Hattrick\Hattrick.Server\bin\Debug\net8.0\package.json
