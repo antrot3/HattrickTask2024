@@ -1,13 +1,31 @@
 <script setup lang="ts">
-import HelloWorld from './components/HelloWorld.vue'
-</script>
+    import { ref, computed } from 'vue'
+    import HomePage from './components/HomePage.vue'
+    import UserProfile from './components/UserProfile.vue'
 
+    const routes = {
+        '/': HomePage,
+        '/userProfile': UserProfile
+    }
+
+    const currentPath = ref(window.location.hash)
+
+    window.addEventListener('hashchange', () => {
+        currentPath.value = window.location.hash
+    })
+
+    const currentView = computed(() => {
+        return routes[currentPath.value.slice(1) || '/'] || NotFound
+    })
+</script>
 <template>
-  <header>
-    <div class="wrapper">
-      <HelloWorld msg="You did it!" />
-    </div>
-  </header>
+    <a href="#/">Home</a> |
+    <a href="#/userProfile">UserProfile</a> |
+    <header>
+        <div class="wrapper">
+            <component :is="currentView" />
+        </div>
+    </header>
 </template>
 
 <style scoped>
