@@ -48,7 +48,9 @@
             async fetchSports() {
                 this.loading = true;
                 try {
-                    const response = await fetch('http://localhost:5173/sports');
+                    const response = await fetch("http://localhost:5076/Sportovi/get", {
+                    })
+
                     if (!response.ok) {
                         throw new Error(`HTTP error! status: ${response.status}`);
                     }
@@ -64,7 +66,7 @@
                 if (this.newSportName.trim() === '') return;
 
                 try {
-                    const response = await fetch('http://localhost:5076/Sports', {
+                    const response = await fetch('http://localhost:5076/Sportovi', {
                         method: 'POST',
                         headers: { 'Content-Type': 'application/json' },
                         body: JSON.stringify(this.newSportName),

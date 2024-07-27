@@ -13,10 +13,82 @@
     </div>
 </template>
 
-<script lang="ts">
-    import { defineComponent } from 'vue';
+<script lang="ts">import { defineComponent } from 'vue';
 
-</script>
+    type Sport = {
+        id: number;
+        name: string;
+    };
+
+    type Data = {
+        loading: boolean;
+        sports: Sport[];
+        newSportName: string;
+    };
+
+    export default defineComponent({
+        data(): Data {
+            return {
+                loading: false,
+                sports: [],
+                newSportName: '',
+            };
+        },
+        created() {
+            this.fetchSports();
+        },
+        methods: {
+            async fetchSports() {
+                this.loading = true;
+                try {
+                    const response = await fetch("http://localhost:5076/Sportovi/get", {
+                    })
+
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! status: ${response.status}`);
+                    }
+                    const data = await response.json();
+                    this.sports = data.map((name: string, index: number) => ({ id: index, name }));
+                } catch (error) {
+                    console.error('Error fetching sports:', error);
+                } finally {
+                    this.loading = false;
+                }
+            },
+            async addSport() {
+                if (this.newSportName.trim() === '') return;
+
+                try {
+                    const response = await fetch('http://localhost:5076/Sportovi', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(this.newSportName),
+                    });
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! status: ${response.status}`);
+                    }
+                    this.sports.push({ id: this.sports.length, name: this.newSportName });
+                    this.newSportName = '';
+                } catch (error) {
+                    console.error('Error adding sport:', error);
+                }
+            },
+            async deleteSport(id: number) {
+                try {
+                    const response = await fetch(`http://localhost:5076/Sports/${id}`, {
+                        method: 'DELETE',
+                    });
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! status: ${response.status}`);
+                    }
+                    this.sports = this.sports.filter(sport => sport.id !== id);
+                } catch (error) {
+                    console.error('Error deleting sport:', error);
+                }
+            },
+        },
+    });
+    </script>
 
 <style scoped>
     th {

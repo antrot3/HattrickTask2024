@@ -1,3 +1,6 @@
 Hattrick/.vs
-Hattrick/Hattrick.Server/bin
-Hattrick/Hattrick.Server/obj
+Hattrick/Hattrick.Server/bin/
+Hattrick/Hattrick.Server/obj/
+*.dll
+*.pdb
+Hattrick/Hattrick.Server/obj/Debug/net8.0/Hattrick.Server.pdb

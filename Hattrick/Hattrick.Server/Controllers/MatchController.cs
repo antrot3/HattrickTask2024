@@ -32,7 +32,8 @@ namespace Hattrick.Server.Controllers
             _context = context;
         }
 
-        [HttpGet(Name = "GetMatches")]
+        [HttpGet("")]
+        [Route("get")]
         public IEnumerable<MatchResponse> Index()
         {
             var response = new List<MatchResponse>();

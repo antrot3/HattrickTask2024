@@ -2,7 +2,7 @@
 
 namespace Hattrick.Server.Models
 {
-    public class Sport
+    public class SportModel
     {
         [Key]
         public int Id { get; set; }

@@ -137,7 +137,7 @@
             async fetchData() {
                 this.loading = true;
                 try {
-                    const response = await fetch('https://localhost:5173/match');
+                    const response = await fetch('https://localhost:5173/match/get');
                     if (!response.ok) {
                         throw new Error(`HTTP error! status: ${response.status}`);
                     }

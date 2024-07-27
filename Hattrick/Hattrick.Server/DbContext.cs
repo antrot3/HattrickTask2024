@@ -11,7 +11,7 @@ namespace Hattrick.Server
         public HattrickDbContext(DbContextOptions<HattrickDbContext> options) : base(options)
         {
         }
-        public DbSet<Sport> Sports { get; set; }
+        public DbSet<SportModel> Sports { get; set; }
         public DbSet<UserModel> Users { get; set; }
         public DbSet<MatchModel> Matches { get; set; }
         public DbSet<BetTypeModel> BetTypes { get; set; }
