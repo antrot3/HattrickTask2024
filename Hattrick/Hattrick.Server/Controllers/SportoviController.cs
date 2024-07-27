@@ -1,7 +1,5 @@
 ﻿using Hattrick.Server.Models;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 
 namespace Hattrick.Server.Controllers
 {
@@ -22,7 +20,6 @@ namespace Hattrick.Server.Controllers
         {
             return _context.Sports.ToList();
         }
-
 
         [HttpPost(Name = "AddSport")]
         [Route("post")]

@@ -6,57 +6,60 @@
             Loading... Please refresh once the ASP.NET backend has started. See
             <a href="https://aka.ms/jspsintegrationvue">https://aka.ms/jspsintegrationvue</a> for more details.
         </div>
-
+        <!-- ======= Header tools ======= -->
         <div v-for="(sportMatches, sportName) in groupedMatches" :key="sportName">
-            <h2>{{ sportName }}</h2>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Team Home</th>
-                        <th>Team Away</th>
-                        <th>Date</th>
-                        <th>Odd Value 1</th>
-                        <th>Odd Value 2</th>
-                        <th>Odd Value X</th>
-                        <th>Odd Value 1X</th>
-                        <th>Odd Value 2X</th>
-                        <th>Odd Value 12</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr v-for="match in sportMatches" :key="match.date">
-                        <td>{{ match.teamHome }}</td>
-                        <td>{{ match.teamAway }}</td>
-                        <td>{{ new Date(match.date).toLocaleString() }}</td>
-                        <td>
-                            <input type="radio" :name="'odd-' + match.date" v-model="selectedOdds[match.date]" :value="{ odd: match.oddValue1, teamHome: match.teamHome, teamAway: match.teamAway }" :disabled="match.oddValue1 === 1"/>
-                            {{ match.oddValue1 }}
-                        </td>
-                        <td>
-                            <input type="radio" :name="'odd-' + match.date" v-model="selectedOdds[match.date]" :value="{ odd: match.oddValue2, teamHome: match.teamHome, teamAway: match.teamAway }" :disabled="match.oddValue2 === 1" />
-                            {{ match.oddValue2 }}
-                        </td>
-                        <td>
-                            <input type="radio" :name="'odd-' + match.date" v-model="selectedOdds[match.date]" :value="{ odd: match.oddValuex, teamHome: match.teamHome, teamAway: match.teamAway }" :disabled="match.oddValuex === 1" />
-                            {{ match.oddValuex }}
-                        </td>
-                        <td>
-                            <input type="radio" :name="'odd-' + match.date" v-model="selectedOdds[match.date]" :value="{ odd: match.oddValue1x, teamHome: match.teamHome, teamAway: match.teamAway }" :disabled="match.oddValue1x === 1" />
-                            {{ match.oddValue1x }}
-                        </td>
-                        <td>
-                            <input type="radio" :name="'odd-' + match.date" v-model="selectedOdds[match.date]" :value="{ odd: match.oddValue2x, teamHome: match.teamHome, teamAway: match.teamAway }" :disabled="match.oddValue2x === 1" />
-                            {{ match.oddValue2x }}
-                        </td>
-                        <td>
-                            <input type="radio" :name="'odd-' + match.date" v-model="selectedOdds[match.date]" :value="{ odd: match.oddValue12, teamHome: match.teamHome, teamAway: match.teamAway }" :disabled="match.oddValue12 === 1" />
-                            {{ match.oddValue12 }}
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-            <button @click="clearOdds(sportMatches)">Clear All</button>
+            <div class="datatable-container">
+                <h2>{{ sportName }}</h2>
+                <table class="datatable">
+                    <thead>
+                        <tr>
+                            <th>Team Home</th>
+                            <th>Team Away</th>
+                            <th>Date</th>
+                            <th>Odd Value 1</th>
+                            <th>Odd Value 2</th>
+                            <th>Odd Value X</th>
+                            <th>Odd Value 1X</th>
+                            <th>Odd Value 2X</th>
+                            <th>Odd Value 12</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr v-for="match in sportMatches" :key="match.date" class="table-dark">
+                            <td>{{ match.teamHome }}</td>
+                            <td>{{ match.teamAway }}</td>
+                            <td>{{ new Date(match.date).toLocaleString() }}</td>
+                            <td>
+                                <input type="radio" :name="'odd-' + match.date" v-model="selectedOdds[match.date]" :value="{ odd: match.oddValue1, teamHome: match.teamHome, teamAway: match.teamAway }" :disabled="match.oddValue1 === 1" />
+                                {{ match.oddValue1 }}
+                            </td>
+                            <td>
+                                <input type="radio" :name="'odd-' + match.date" v-model="selectedOdds[match.date]" :value="{ odd: match.oddValue2, teamHome: match.teamHome, teamAway: match.teamAway }" :disabled="match.oddValue2 === 1" />
+                                {{ match.oddValue2 }}
+                            </td>
+                            <td>
+                                <input type="radio" :name="'odd-' + match.date" v-model="selectedOdds[match.date]" :value="{ odd: match.oddValuex, teamHome: match.teamHome, teamAway: match.teamAway }" :disabled="match.oddValuex === 1" />
+                                {{ match.oddValuex }}
+                            </td>
+                            <td>
+                                <input type="radio" :name="'odd-' + match.date" v-model="selectedOdds[match.date]" :value="{ odd: match.oddValue1x, teamHome: match.teamHome, teamAway: match.teamAway }" :disabled="match.oddValue1x === 1" />
+                                {{ match.oddValue1x }}
+                            </td>
+                            <td>
+                                <input type="radio" :name="'odd-' + match.date" v-model="selectedOdds[match.date]" :value="{ odd: match.oddValue2x, teamHome: match.teamHome, teamAway: match.teamAway }" :disabled="match.oddValue2x === 1" />
+                                {{ match.oddValue2x }}
+                            </td>
+                            <td>
+                                <input type="radio" :name="'odd-' + match.date" v-model="selectedOdds[match.date]" :value="{ odd: match.oddValue12, teamHome: match.teamHome, teamAway: match.teamAway }" :disabled="match.oddValue12 === 1" />
+                                {{ match.oddValue12 }}
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <button @click="clearOdds(sportMatches)">Clear All</button>
+            </div>
         </div>
+
 
         <div class="selected-info" v-if="selectedMatches.length > 0">
             <h3>Selected Matches:</h3>
@@ -166,29 +169,16 @@
 </script>
 
 <style scoped>
-    th {
-        font-weight: bold;
+    table {
+        border-collapse: collapse;
+        width: 100%;
     }
 
     th, td {
-        padding: 0.5rem;
+        padding: 8px;
+        text-align: left;
+        border-bottom: 1px solid #ddd;
     }
-
-    .betting-component {
-        text-align: center;
-    }
-
-    table {
-        margin-left: auto;
-        margin-right: auto;
-        border-collapse: collapse;
-        width: 80%;
-    }
-
-    table, th, td {
-        border: 1px solid black;
-    }
-
     .loading {
         margin: 2rem;
     }

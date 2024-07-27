@@ -1,94 +1,168 @@
 <template>
-    <div class="betting-component">
+    <div class="sports-component">
         <h1>User Profile</h1>
 
         <div v-if="loading" class="loading">
-            Loading... Please refresh once the ASP.NET backend has started. See
-            <a href="https://aka.ms/jspsintegrationvue">https://aka.ms/jspsintegrationvue</a> for more details.
+            Loading... Please wait.
         </div>
 
-        <div v-for="(sportMatches, sportName) in groupedMatches" :key="sportName">
-            <h2>User Profile</h2>
+        <div v-if="!loading">
+            <ul>
+                {{ user.name }}
+
+                {{ user.walletBalance }}
+            </ul>
+
+            <input v-model="addToBallance" placeholder="Add to Balance" type="number" min="0" />
+            <button @click="addBalance">Add To ballance</button>
+            <input v-model="withdrwBalance" placeholder="Withdraw to bank" type="number" min="0" />
+            <button @click="withdrwFounds">Withdraw to bank</button>
+            <div style="padding-top:50px">
+                <h1> Transaction history</h1>>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>amount</th>
+                            <th>transaction type</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr v-for="transactions in walletTransactionModels" :key="transactions.amount">
+                            <td>{{ transactions.amount }}</td>
+                            <td>{{ transactions.transactionType }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div style="padding-top:50px">
+                <h1> Bet history</h1>>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>totalOdd</th>
+                            <th>stake/ money on bet</th>
+                            <th>potentialWinning</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr v-for="ticket in ticketsPlaid" :key="ticket.totalOdd ">
+                            <td>{{ ticket.totalOdd }}</td>
+                            <td>{{ ticket.stake }}</td>
+                            <td>{{ ticket.potentialWinning }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
-    </div>
+        </div>
 </template>
 
 <script lang="ts">import { defineComponent } from 'vue';
 
-    type Sport = {
-        id: number;
+    type User = {
+        walletBalance: number;
         name: string;
+
+    };
+
+    type Ticket = {
+    totalOdd: number;
+    stake: string;
+    potentialWinning: string;
+
     };
 
     type Data = {
         loading: boolean;
-        sports: Sport[];
-        newSportName: string;
+        user: User;
+        addToBallance: number;
+    };
+
+    type WalletTransactionModels = {
+        amount: number;
+        transactionType: string;
     };
 
     export default defineComponent({
         data(): Data {
             return {
                 loading: false,
-                sports: [],
-                newSportName: '',
+                user: null,
+                walletTransactionModels: [],
+                ticketsPlaid: [],
+                addToBallance: 0,
             };
         },
         created() {
-            this.fetchSports();
+            this.getUser();
         },
         methods: {
-            async fetchSports() {
+            async getUser() {
                 this.loading = true;
                 try {
-                    const response = await fetch("http://localhost:5076/Sportovi/get", {
+                    const response = await fetch("https://localhost:7020/User/get", {
                     })
 
                     if (!response.ok) {
                         throw new Error(`HTTP error! status: ${response.status}`);
                     }
                     const data = await response.json();
-                    this.sports = data.map((name: string, index: number) => ({ id: index, name }));
+                    this.user = data.user
+                    this.walletTransactionModels = data.walletTransactionModels
+                    this.ticketsPlaid = data.ticketsPlaid
                 } catch (error) {
                     console.error('Error fetching sports:', error);
                 } finally {
                     this.loading = false;
                 }
             },
-            async addSport() {
-                if (this.newSportName.trim() === '') return;
+            async addBalance() {
+                 if (this.addToBallance <= 0) {
+                    alert("The balance to be added cannot be negative or 0.");
+                    return;
+                }
 
                 try {
-                    const response = await fetch('http://localhost:5076/Sportovi', {
+                    const response = await fetch('https://localhost:7020/User/post', {
                         method: 'POST',
                         headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify(this.newSportName),
+                        body: JSON.stringify(this.addToBallance),
                     });
                     if (!response.ok) {
                         throw new Error(`HTTP error! status: ${response.status}`);
                     }
-                    this.sports.push({ id: this.sports.length, name: this.newSportName });
-                    this.newSportName = '';
+                    location. reload();
                 } catch (error) {
                     console.error('Error adding sport:', error);
                 }
             },
-            async deleteSport(id: number) {
-                try {
-                    const response = await fetch(`http://localhost:5076/Sports/${id}`, {
-                        method: 'DELETE',
-                    });
-                    if (!response.ok) {
-                        throw new Error(`HTTP error! status: ${response.status}`);
-                    }
-                    this.sports = this.sports.filter(sport => sport.id !== id);
-                } catch (error) {
-                    console.error('Error deleting sport:', error);
-                }
-            },
+            async withdrwFounds() {
+               if (this.withdrwBalance <= 0) {
+                  alert("The balance to be added cannot be negative or 0.");
+                  return;
+              }
+              if (this.user.walletBalance < this.withdrwBalance) {
+                  alert("You can not withdraw more than you have");
+                  return;
+              }
+
+              try {
+                  const response = await fetch('https://localhost:7020/User/WithrdrawToBank', {
+                      method: 'POST',
+                      headers: { 'Content-Type': 'application/json' },
+                      body: JSON.stringify(this.withdrwBalance),
+                  });
+                  if (!response.ok) {
+                      throw new Error(`HTTP error! status: ${response.status}`);
+                  }
+                location. reload();
+              } catch (error) {
+                  console.error('Error adding sport:', error);
+              }
+          },
         },
-    });
-    </script>
+    });</script>
 
 <style scoped>
     th {

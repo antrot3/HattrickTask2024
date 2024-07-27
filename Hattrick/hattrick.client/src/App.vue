@@ -22,16 +22,13 @@
     })
 </script>
 <template>
-    <a href="#/">Home</a> |
-    <a href="#/newSport">Add New sport</a> |
-    <a href="#/userProfile">Add New mathch with odds</a> |
-    <a href="#/userProfile">Add new special offer</a> |
-    <a href="#/userProfile">UserProfile</a> |
-    <header>
-        <div class="wrapper">
-            <component :is="currentView" />
-        </div>
-    </header>
+  
+
+        <header>
+            <div class="wrapper">
+                <component :is="currentView" />
+            </div>
+        </header>
 </template>
 
 <style scoped>
@@ -46,7 +43,7 @@ header {
 
 @media (min-width: 1024px) {
   header {
-    display: flex;
+    display: block;
     place-items: center;
     padding-right: calc(var(--section-gap) / 2);
   }
