@@ -18,12 +18,12 @@
             <input v-model="withdrwBalance" placeholder="Withdraw to bank" type="number" min="0" />
             <button @click="withdrwFounds">Withdraw to bank</button>
             <div style="padding-top:50px">
-                <h1> Transaction history</h1>>
+                <h1> Transaction history</h1>
                 <table>
                     <thead>
                         <tr>
-                            <th>amount</th>
-                            <th>transaction type</th>
+                            <th>Amount</th>
+                            <th>Transaction description</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -36,13 +36,13 @@
             </div>
 
             <div style="padding-top:50px">
-                <h1> Bet history</h1>>
+                <h1>Bet history</h1>
                 <table>
                     <thead>
                         <tr>
-                            <th>totalOdd</th>
-                            <th>stake/ money on bet</th>
-                            <th>potentialWinning</th>
+                            <th>Total odds</th>
+                            <th>Stake/ Money on bet</th>
+                            <th>Potential winning</th>
                         </tr>
                     </thead>
                     <tbody>

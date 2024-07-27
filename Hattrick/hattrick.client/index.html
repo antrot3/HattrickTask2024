@@ -7,10 +7,22 @@
     <title>Vite App</title>
     <link />
 </head>
-<body>
-    <a href="#/">Home </a> |
-    <a href="#/newSport"> Add New sport </a> |
-    <a href="#/userProfile"> User profile and wallet </a> |
+<body class="p-3 mb-2 bg-dark text-white">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="#">Home / Bet table</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#/newSport">Add New sport</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#/userProfile">User Profile</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
     <div id="app"></div>
     <script type="module" src="/src/main.ts"></script>
 </body>

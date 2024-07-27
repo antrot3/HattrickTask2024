@@ -1,5 +1,6 @@
 <script setup lang="ts">
     import { ref, computed } from 'vue'
+    import '../Content\\bootstrap.css'
     import HomePage from './components/HomePage.vue'
     import NewSports from './components/NewSports.vue'
     import UserProfile from './components/UserProfile.vue'
@@ -22,40 +23,42 @@
     })
 </script>
 <template>
-  
 
-        <header>
-            <div class="wrapper">
+
+    <header class="p-3 mb-2 bg-dark text-white">
+        <div class="wrapper" >
+            <div class="p-3 mb-2 bg-dark text-white">
                 <component :is="currentView" />
             </div>
-        </header>
+        </div>
+    </header>
 </template>
 
 <style scoped>
-header {
-  line-height: 1.5;
-}
+    header {
+        line-height: 1.5;
+    }
 
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
-}
+    .logo {
+        display: block;
+        margin: 0 auto 2rem;
+    }
 
-@media (min-width: 1024px) {
-  header {
-    display: block;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
-  }
+    @media (min-width: 1024px) {
+        header {
+            display: block;
+            place-items: center;
+            padding-right: calc(var(--section-gap) / 2);
+        }
 
-  .logo {
-    margin: 0 2rem 0 0;
-  }
+        .logo {
+            margin: 0 2rem 0 0;
+        }
 
-  header .wrapper {
-    display: block;
-    place-items: flex-start;
-    flex-wrap: wrap;
-  }
-}
+        header .wrapper {
+            display: block;
+            place-items: flex-start;
+            flex-wrap: wrap;
+        }
+    }
 </style>

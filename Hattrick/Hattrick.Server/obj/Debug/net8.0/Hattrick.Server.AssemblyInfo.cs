@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Hattrick.Server")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+cb76f3e53196bc870b2cb12edfda473ddb1b9977")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+5a14c4841f319f88ad3fedf49cf8a522f66d0b83")]
 [assembly: System.Reflection.AssemblyProductAttribute("Hattrick.Server")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Hattrick.Server")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

@@ -10,7 +10,7 @@
         <div v-for="(sportMatches, sportName) in groupedMatches" :key="sportName">
             <div class="datatable-container">
                 <h2>{{ sportName }}</h2>
-                <table class="datatable">
+                <table class="table table-dark">
                     <thead>
                         <tr>
                             <th>Team Home</th>
