@@ -10,13 +10,16 @@
             <ul>
                 {{ user.name }}
 
-                {{ user.walletBalance }}
+                {{ user.walletBalance.toFixed(2)  }} Euro
             </ul>
 
-            <input v-model="addToBallance" placeholder="Add to Balance" type="number" min="0" />
-            <button @click="addBalance">Add To ballance</button>
-            <input v-model="withdrwBalance" placeholder="Withdraw to bank" type="number" min="0" />
-            <button @click="withdrwFounds">Withdraw to bank</button>
+            <input v-model="addToBallance" placeholder="Add  to Wallet" type="number" min="0" />
+            <button @click="addBalance">Add to Wallet</button>
+            <br />
+            <br />
+            <br />
+            <input v-model="withdrwBalance" placeholder="Deposit to bank" type="number" min="0" />
+            <button @click="withdrwFounds">Deposit to Bank</button>
             <div class="datatable-container">
                 <h1> Transaction history</h1>
                 <table class="table table-hover">
@@ -28,7 +31,7 @@
                     </thead>
                     <tbody>
                         <tr v-for="transactions in walletTransactionModels" :key="transactions.amount">
-                            <td>{{ transactions.amount }}</td>
+                            <td>{{ transactions.amount.toFixed(2)  }} Euro</td>
                             <td>{{ transactions.transactionType }}</td>
                         </tr>
                     </tbody>
@@ -49,9 +52,9 @@
                     </thead>
                     <tbody>
                         <tr v-for="ticket in ticketsPlaid" :key="ticket.totalOdd" :class="{ 'bg-success': ticket.didBetWin, 'bg-danger': !ticket.didBetWin}">
-                            <td>{{ ticket.totalOdd }}</td>
-                            <td>{{ ticket.stake }}</td>
-                            <td>{{ ticket.potentialWinning }}</td>
+                            <td>{{ ticket.totalOdd.toFixed(2)  }}</td>
+                            <td>{{ ticket.stake.toFixed(2)}} Euro</td>
+                            <td>{{ ticket.potentialWinning.toFixed(2)}} Euro</td>
                             <td>{{ ticket.isBetPlayed }}</td>
                             <td>{{ ticket.didBetWin }}</td>
                         </tr>
@@ -96,7 +99,6 @@
                 user: null,
                 walletTransactionModels: [],
                 ticketsPlaid: [],
-                addToBallance: 0,
             };
         },
         created() {
@@ -106,7 +108,7 @@
             async getUser() {
                 this.loading = true;
                 try {
-                    const response = await fetch("https://localhost:7020/User/get", {
+                    const response = await fetch("https://localhost:7020/user/get", {
                     })
 
                     if (!response.ok) {
@@ -127,7 +129,6 @@
                     alert("The balance to be added cannot be negative or 0.");
                     return;
                 }
-
                 try {
                     const response = await fetch('https://localhost:7020/User/post', {
                         method: 'POST',
@@ -153,7 +154,7 @@
               }
 
               try {
-                  const response = await fetch('https://localhost:7020/User/WithrdrawToBank', {
+                  const response = await fetch('https://localhost:7020/User/DepositToBank', {
                       method: 'POST',
                       headers: { 'Content-Type': 'application/json' },
                       body: JSON.stringify(this.withdrwBalance),

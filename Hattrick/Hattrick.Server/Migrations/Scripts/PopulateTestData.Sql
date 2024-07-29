@@ -17,10 +17,10 @@ INSERT INTO matches (sportid, teamhome, teamaway, date) VALUES
 
 -- Insert into wallet_transactions
 INSERT INTO wallettransactions (userid, amount, transactiontype, date) VALUES
-(1, 50, 'deposit', '2024-07-01 10:00:00'),
-(1, 50, 'deposit', '2024-07-01 11:00:00'),
-(1, 20, 'withdrawal', '2024-07-02 09:00:00'),
-(1, 20, 'bet', '2024-07-02 09:00:00');
+(1, 50, 'Add to wallet', '2024-07-01 10:00:00'),
+(1, 50, 'Add to wallet', '2024-07-01 11:00:00'),
+(1, 20, 'Deposit to bank', '2024-07-02 09:00:00'),
+(1, 20, 'Bet', '2024-07-02 09:00:00');
 
 -- Insert into bet_types
 INSERT INTO bettypes (name, description) VALUES

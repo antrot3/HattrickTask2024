@@ -2,7 +2,6 @@
     import { ref, computed } from 'vue'
     import '../Content\\bootstrap.css'
     import HomePage from './components/HomePage.vue'
-    import NewSports from './components/NewSports.vue'
     import UserProfile from './components/UserProfile.vue'
 
     const isShowModal = ref(false)
@@ -15,7 +14,6 @@
     }
     const routes = {
         '/': HomePage,
-        '/newSport': NewSports,
         '/userProfile': UserProfile
     }
 

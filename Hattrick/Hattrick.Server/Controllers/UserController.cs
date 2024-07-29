@@ -49,7 +49,7 @@ namespace Hattrick.Server.Controllers
             return user;
         }
 
-        [HttpPost(Name = "AddBalance")]
+        [HttpPost(Name = "AddToWallet")]
         [Route("post")]
         public void Post([FromBody] decimal balanceToAdd)
         {
@@ -57,7 +57,7 @@ namespace Hattrick.Server.Controllers
             _context.WalletTransactions.Add(new WalletTransactionModel()
             {
                 Amount = balanceToAdd,
-                TransactionType = "deposit",
+                TransactionType = "Add to wallet",
                 UserId = user.Id,
                 Date = DateTime.Now
             });
@@ -65,9 +65,9 @@ namespace Hattrick.Server.Controllers
             _context.SaveChanges();
         }
 
-        [HttpPost(Name = "WithrdrawToBank")]
-        [Route("WithrdrawToBank")]
-        public void WithrdrawToBank([FromBody] decimal balanceToWithraw)
+        [HttpPost(Name = "DepositToBank")]
+        [Route("DepositToBank")]
+        public void DepositToBank([FromBody] decimal balanceToWithraw)
         {
             var user = _context.Users.FirstOrDefault();
             if (user.WalletBalance > balanceToWithraw)
@@ -75,7 +75,7 @@ namespace Hattrick.Server.Controllers
                 _context.WalletTransactions.Add(new WalletTransactionModel()
                 {
                     Amount = balanceToWithraw,
-                    TransactionType = "withdrawal",
+                    TransactionType = "Deposit to bank",
                     UserId = user.Id,
                     Date = DateTime.Now
                 });

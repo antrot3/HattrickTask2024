@@ -47,6 +47,8 @@
                             <th>1X</th>
                             <th>2X</th>
                             <th>12</th>
+                            <th>Top offer description</th>
+                            <th>Top offer odds</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -55,28 +57,35 @@
                             <td>{{ match.teamAway }}</td>
                             <td>{{ new Date(match.date).toLocaleString() }}</td>
                             <td>
-                                <input type="radio" :name="'odd-' + match.id" v-model="selectedOdds[match.id]" :value="{ odd: match.oddValue1, teamHome: match.teamHome, teamAway: match.teamAway }" :disabled="match.oddValue1 === 1" />
+                                <input type="radio" :name="'oddValue1-' + match.id" v-model="selectedOdds[match.id]" :value="{id:match.id, hasTopOffer: match.oddValue !== 1, oddType: '1', odd: match.oddValue1, teamHome: match.teamHome, teamAway: match.teamAway }" :disabled="match.oddValue1 === 1" />
                                 {{ match.oddValue1 }}
                             </td>
                             <td>
-                                <input type="radio" :name="'odd-' + match.id" v-model="selectedOdds[match.id]" :value="{ odd: match.oddValue2, teamHome: match.teamHome, teamAway: match.teamAway }" :disabled="match.oddValue2 === 1" />
+                                <input type="radio" :name="'oddValue2-' + match.id" v-model="selectedOdds[match.id]" :value="{id:match.id, hasTopOffer: match.oddValue !== 1, oddType: '2', odd: match.oddValue2, teamHome: match.teamHome, teamAway: match.teamAway }" :disabled="match.oddValue2 === 1" />
                                 {{ match.oddValue2 }}
                             </td>
                             <td>
-                                <input type="radio" :name="'odd-' + match.id" v-model="selectedOdds[match.id]" :value="{ odd: match.oddValuex, teamHome: match.teamHome, teamAway: match.teamAway }" :disabled="match.oddValuex === 1" />
+                                <input type="radio" :name="'oddValuex-' + match.id" v-model="selectedOdds[match.id]" :value="{id:match.id, hasTopOffer: match.oddValue !== 1, oddType: 'x', odd: match.oddValuex, teamHome: match.teamHome, teamAway: match.teamAway }" :disabled="match.oddValuex === 1" />
                                 {{ match.oddValuex }}
                             </td>
                             <td>
-                                <input type="radio" :name="'odd-' + match.id" v-model="selectedOdds[match.id]" :value="{ odd: match.oddValue1x, teamHome: match.teamHome, teamAway: match.teamAway }" :disabled="match.oddValue1x === 1" />
+                                <input type="radio" :name="'oddValue' + match.id" v-model="selectedOdds[match.id]" :value="{ id:match.id, hasTopOffer: match.oddValue !== 1, oddType: '1x', odd: match.oddValuex, teamHome: match.teamHome, teamAway: match.teamAway }" :disabled="match.oddValuex === 1" />
                                 {{ match.oddValue1x }}
                             </td>
                             <td>
-                                <input type="radio" :name="'odd-' + match.id" v-model="selectedOdds[match.id]" :value="{ odd: match.oddValue2x, teamHome: match.teamHome, teamAway: match.teamAway }" :disabled="match.oddValue2x === 1" />
+                                <input type="radio" :name="'oddValue2x-' + match.id" v-model="selectedOdds[match.id]" :value="{ id:match.id, hasTopOffer: match.oddValue !== 1, oddType: '2x', odd: match.oddValue2x, teamHome: match.teamHome, teamAway: match.teamAway }" :disabled="match.oddValue2x === 1" />
                                 {{ match.oddValue2x }}
                             </td>
                             <td>
-                                <input type="radio" :name="'odd-' + match.id" v-model="selectedOdds[match.id]" :value="{ odd: match.oddValue12, teamHome: match.teamHome, teamAway: match.teamAway }" :disabled="match.oddValue12 === 1" />
+                                <input type="radio" :name="'oddValue12-' + match.id" v-model="selectedOdds[match.id]" :value="{ id:match.id, hasTopOffer: match.oddValue !== 1, oddType: '12', odd: match.oddValue12, teamHome: match.teamHome, teamAway: match.teamAway }" :disabled="match.oddValue12 === 1" />
                                 {{ match.oddValue12 }}
+                            </td>
+                            <td>
+                                {{ match.topDescription }}
+                            </td>
+                            <td>
+                                <input type="radio" :name="'odd-' + match.id" v-model="selectedOdds[match.id]" :value="{ id:match.id,  hasTopOffer: match.oddValue !== 1, oddType: 'specialOffer', odd: match.oddValue, teamHome: match.teamHome, teamAway: match.teamAway }" :disabled="match.oddValue === 1" />
+                                {{ match.oddValue }}
                             </td>
                         </tr>
                     </tbody>
@@ -96,8 +105,11 @@
         </div>
 
         <div class="multiplier-info" v-if="selectedOddsCount > 0">
-            <p>Multiplier of selected odds: {{ totalMultiplier.toFixed(2) }}</p>
-            <button @click="submitBets">Submit</button>
+            <p>Multiplier of selected odds: {{ totalMultiplier.toFixed(2)  }}</p>
+            <input v-model="betingAmount" placeholder="How much do you want to bet" type="number" min="0" value="1" @change="onChange($event)" />
+            <p>How much are you bettin after handling costs of 5%: {{ handlingCosts.toFixed(2)  }}</p>
+            <p>Pottential Winning {{ potentialWinning.toFixed(2)  }}</p>
+            <button @click="submitBets">Submit Ticket</button>
         </div>
     </div>
 </template>
@@ -117,20 +129,34 @@
         oddValue1x: number;
         oddValue2x: number;
         oddValue12: number;
+        topDescription: number;
+        oddValue: number;
     };
 
     type SelectedOdd = {
+        id: number;
         odd: number;
+        oddType: string;
         teamHome: string;
         teamAway: string;
+        hasTopOffer: boolean;
+    };
+
+    type MatchRequst = {
+        betAmmount: number;
+        selectedOdds: SelectedOdd[];
     };
 
     type Data = {
         loading: boolean;
+        handlingCosts: number;
+        potentialWinning: number;
+        betingAmount: number;
         matches: Match[];
         isActive: false;
         toggleIcon: 'See Rules';
-        selectedOdds: { [key: string]: SelectedOdd };
+        selectedOdds: SelectedOdd[];
+        matchRequst: MatchRequst
     };
 
     export default defineComponent({
@@ -141,6 +167,9 @@
                 loading: false,
                 matches: [],
                 selectedOdds: {},
+                matchRequst: {},
+                handlingCosts: 0,
+                potentialWinning: 0,
             };
         },
         computed: {
@@ -162,6 +191,10 @@
             totalMultiplier(): number {
                 return this.selectedMatches.reduce((acc, odd) => acc * odd.odd, 1);
             },
+            onChange(event): void {
+                this.handlingCosts = this.betingAmount * 0.95;
+                this.potentialWinning = this.selectedMatches.reduce((acc, odd) => acc * odd.odd, 1) * this.handlingCosts;
+            },
         },
         created() {
             this.fetchData();
@@ -170,16 +203,16 @@
             toggle() {
                 this.isActive = !this.isActive;
                 if (this.isActive == true) {
-                    this.toggleIcon= 'Colapse Rules';
+                    this.toggleIcon = 'Colapse Rules';
                 }
                 else {
-                    this.toggleIcon= 'See Rules';
+                    this.toggleIcon = 'See Rules';
                 }
             },
             async fetchData() {
                 this.loading = true;
                 try {
-                    const response = await fetch('https://localhost:5173/match/get');
+                    const response = await fetch('match/get');
                     if (!response.ok) {
                         throw new Error(`HTTP error! status: ${response.status}`);
                     }
@@ -199,13 +232,37 @@
                     }
                 });
             },
-            submitBets() {
-                // Placeholder for submitting the selected bets
-                alert('Bets submitted successfully!');
+            async submitBets() {
+                if (this.betingAmount <= 0) {
+                    alert("The balance to be added cannot be negative or 0.");
+                    return;
+                }
+                try {
+                    const selectedOddsList: SelectedOdd[] = Object.values(this.selectedOdds);
+                    this.matchRequst.betAmmount = this.betingAmount;
+                    this.matchRequst.selectedOdds = selectedOddsList;
+
+                    const response = await fetch('https://localhost:7020/match/post', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(this.matchRequst),
+                    });
+                    if (response.ok) {
+                        alert(response);
+                    }
+                    if (!response.ok) {
+                         alert(response)
+                        throw new Error(`HTTP error! status: ${response.status}`);
+                    }
+                    location.reload();
+                } catch (error) {
+                    console.error('Error adding sport:', error);
+                }
             },
         },
     });
 </script>
+
 
 <style scoped>
     .collapsible {
