@@ -5,7 +5,14 @@
     import NewSports from './components/NewSports.vue'
     import UserProfile from './components/UserProfile.vue'
 
+    const isShowModal = ref(false)
 
+    function closeModal() {
+        isShowModal.value = false
+    }
+    function showModal() {
+        isShowModal.value = true
+    }
     const routes = {
         '/': HomePage,
         '/newSport': NewSports,
@@ -26,7 +33,7 @@
 
 
     <header class="p-3 mb-2 bg-dark text-white">
-        <div class="wrapper" >
+        <div class="wrapper">
             <div class="p-3 mb-2 bg-dark text-white">
                 <component :is="currentView" />
             </div>
@@ -46,7 +53,7 @@
 
     @media (min-width: 1024px) {
         header {
-            display: block;
+            display: contents;
             place-items: center;
             padding-right: calc(var(--section-gap) / 2);
         }

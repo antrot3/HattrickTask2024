@@ -17,9 +17,9 @@
             <button @click="addBalance">Add To ballance</button>
             <input v-model="withdrwBalance" placeholder="Withdraw to bank" type="number" min="0" />
             <button @click="withdrwFounds">Withdraw to bank</button>
-            <div style="padding-top:50px">
+            <div class="datatable-container">
                 <h1> Transaction history</h1>
-                <table>
+                <table class="table table-hover">
                     <thead>
                         <tr>
                             <th>Amount</th>
@@ -35,7 +35,7 @@
                 </table>
             </div>
 
-            <div style="padding-top:50px">
+            <div style="padding-top:50px" class="datatable-container">
                 <h1>Bet history</h1>
                 <table>
                     <thead>
@@ -43,19 +43,23 @@
                             <th>Total odds</th>
                             <th>Stake/ Money on bet</th>
                             <th>Potential winning</th>
+                            <th>Is Bet played</th>
+                            <th>Did it win</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr v-for="ticket in ticketsPlaid" :key="ticket.totalOdd ">
+                        <tr v-for="ticket in ticketsPlaid" :key="ticket.totalOdd" :class="{ 'bg-success': ticket.didBetWin, 'bg-danger': !ticket.didBetWin}">
                             <td>{{ ticket.totalOdd }}</td>
                             <td>{{ ticket.stake }}</td>
                             <td>{{ ticket.potentialWinning }}</td>
+                            <td>{{ ticket.isBetPlayed }}</td>
+                            <td>{{ ticket.didBetWin }}</td>
                         </tr>
                     </tbody>
                 </table>
             </div>
         </div>
-        </div>
+    </div>
 </template>
 
 <script lang="ts">import { defineComponent } from 'vue';
@@ -70,7 +74,8 @@
     totalOdd: number;
     stake: string;
     potentialWinning: string;
-
+    isBetPlayed: bool;
+    didBetWin: bool;
     };
 
     type Data = {
@@ -165,6 +170,9 @@
     });</script>
 
 <style scoped>
+    table {
+        width: 100%;
+    }
     th {
         font-weight: bold;
     }

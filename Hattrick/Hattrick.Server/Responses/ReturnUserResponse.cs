@@ -16,6 +16,8 @@ namespace Hattrick.Server.Responses
         public decimal TotalOdd { get; set; }
         public decimal Stake { get; set; }
         public decimal PotentialWinning { get; set; }
+        public bool IsBetPlayed { get; set; }
+        public bool DidBetWin { get; set; }
         public List<TicektBetsPlaid> MatchesPlaid { get; set; }
     }
 

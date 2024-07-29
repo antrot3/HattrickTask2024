@@ -14,5 +14,7 @@ namespace Hattrick.Server.Models
         public decimal Stake { get; set; }
         public decimal PotentialWinning { get; set; }
         public DateTime Date { get; set; }
+        public bool IsBetPlayed { get; set; }
+        public bool DidBetWin { get; set; }
     }
 }

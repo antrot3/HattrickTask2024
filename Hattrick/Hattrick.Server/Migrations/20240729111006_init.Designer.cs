@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Hattrick.Server.Migrations
 {
     [DbContext(typeof(HattrickDbContext))]
-    [Migration("20240726210944_init")]
+    [Migration("20240729111006_init")]
     partial class init
     {
         /// <inheritdoc />
@@ -101,7 +101,7 @@ namespace Hattrick.Server.Migrations
                     b.ToTable("Matches");
                 });
 
-            modelBuilder.Entity("Hattrick.Server.Models.Sport", b =>
+            modelBuilder.Entity("Hattrick.Server.Models.SportModel", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -159,6 +159,12 @@ namespace Hattrick.Server.Migrations
 
                     b.Property<DateTime>("Date")
                         .HasColumnType("datetime(6)");
+
+                    b.Property<bool>("DidBetWin")
+                        .HasColumnType("tinyint(1)");
+
+                    b.Property<bool>("IsBetPlayed")
+                        .HasColumnType("tinyint(1)");
 
                     b.Property<decimal>("PotentialWinning")
                         .HasColumnType("decimal(65,30)");
@@ -273,7 +279,7 @@ namespace Hattrick.Server.Migrations
 
             modelBuilder.Entity("Hattrick.Server.Models.MatchModel", b =>
                 {
-                    b.HasOne("Hattrick.Server.Models.Sport", "Sport")
+                    b.HasOne("Hattrick.Server.Models.SportModel", "Sport")
                         .WithMany()
                         .HasForeignKey("SportId")
                         .OnDelete(DeleteBehavior.Cascade)

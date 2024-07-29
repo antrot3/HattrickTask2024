@@ -98,7 +98,9 @@ namespace Hattrick.Server.Migrations
                     TotalOdd = table.Column<decimal>(type: "decimal(65,30)", nullable: false),
                     Stake = table.Column<decimal>(type: "decimal(65,30)", nullable: false),
                     PotentialWinning = table.Column<decimal>(type: "decimal(65,30)", nullable: false),
-                    Date = table.Column<DateTime>(type: "datetime(6)", nullable: false)
+                    Date = table.Column<DateTime>(type: "datetime(6)", nullable: false),
+                    IsBetPlayed = table.Column<bool>(type: "tinyint(1)", nullable: false),
+                    DidBetWin = table.Column<bool>(type: "tinyint(1)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -267,7 +269,7 @@ namespace Hattrick.Server.Migrations
                 table: "WalletTransactions",
                 column: "UserId");
 
-            var sqlFile = Path.Combine("MIgrations/Scripts/PopulateTestData.Sql");
+            var sqlFile = Path.Combine("Migrations/Scripts/PopulateTestData.Sql");
             migrationBuilder.Sql(File.ReadAllText(sqlFile));
         }
 

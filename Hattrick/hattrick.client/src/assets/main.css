@@ -28,7 +28,7 @@ a,
   }
 
     #app {
-        display: grid;
+        display: contents;
         grid-template-columns: 1fr 1fr;
         padding: 5rem 30rem;
     }

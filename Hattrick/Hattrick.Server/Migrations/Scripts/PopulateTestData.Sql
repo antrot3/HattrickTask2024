@@ -42,20 +42,40 @@ INSERT INTO coeficient (matchid, bettypeid, oddvalue) VALUES
 (2, 1, 1.8),
 (2, 2, 2.2),
 (2, 3, 2.8),
+(2, 4, 1.33),
+(2, 5, 1.25),
+(2, 6, 1.47),
 (3, 1, 1.6),
 (3, 2, 2.4),
-(3, 3, 3.1);
+(3, 3, 3.1),
+(3, 3, 2.8),
+(3, 4, 1.33),
+(3, 5, 1.25),
+(3, 6, 1.47),
+
+(4, 1, 1.5),
+(4, 2, 2.5),
+(5, 1, 3.0),
+(5, 2, 1.43),
+(6, 1, 1.25),
+(6, 2, 1.37),
+(7, 1, 1.8),
+(7, 2, 2.2),
+(8, 1, 2.8),
+(8, 2, 1.33),
+(9, 1, 1.05),
+(9, 2, 1.47);
 
 -- Insert into top_offers
 INSERT INTO topoffers (matchid, conditiondescription, oddvalue) VALUES
-(1, 'Special condition for match 1', 3.57),
-(2, 'Special condition for match 2', 2.39);
-
+(1, 'Zabija se vise od 5 golova po utakmici', 3.57),
+(2, 'Zabija se manje od 7 golova po utakmici', 4.39),
+(3, 'Zabija se manje od 3 golova po utakmici', 2.39);
 
 -- Insert into tickets
-INSERT INTO tickets (userid, totalodd, stake, potentialwinning, date) VALUES
-(1, 2.5, 10, 25, '2024-07-03 12:00:00'),
-(1, 3.0, 20, 60, '2024-07-03 13:00:00');
+INSERT INTO tickets (userid, totalodd, stake, potentialwinning, date, isbetplayed, didbetwin) VALUES
+(1, 2.5, 10, 25, '2024-07-03 12:00:00',true,false),
+(1, 3.0, 20, 60, '2024-07-03 13:00:00',true,true);
 
 -- Insert into ticket_bets
 INSERT INTO ticketbets (ticketid, matchid, bettypeid, odd) VALUES

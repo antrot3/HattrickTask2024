@@ -99,29 +99,6 @@
 
 
 <style scoped>
-    th {
-        font-weight: bold;
-    }
-
-    th, td {
-        padding: 0.5rem;
-    }
-
-    .betting-component {
-        text-align: center;
-    }
-
-    table {
-        margin-left: auto;
-        margin-right: auto;
-        border-collapse: collapse;
-        width: 80%;
-    }
-
-    table, th, td {
-        border: 1px solid black;
-    }
-
     .loading {
         margin: 2rem;
     }

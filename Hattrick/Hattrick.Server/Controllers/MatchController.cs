@@ -30,6 +30,7 @@ namespace Hattrick.Server.Controllers
             foreach (var match in matches)
             {
                 var toAdd = new MatchResponse();
+                toAdd.Id = match.Id;
                 toAdd.TeamAway = match.TeamAway;
                 toAdd.TeamHome = match.TeamHome;
                 toAdd.Date = match.Date;

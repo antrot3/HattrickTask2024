@@ -38,7 +38,9 @@ namespace Hattrick.Server.Controllers
                 {
                     TotalOdd = ticketPlaid.TotalOdd,
                     PotentialWinning = ticketPlaid.PotentialWinning,
-                    Stake = ticketPlaid.Stake
+                    Stake = ticketPlaid.Stake,
+                    IsBetPlayed = ticketPlaid.IsBetPlayed,
+                    DidBetWin = ticketPlaid.DidBetWin
                 };
                 ticketBet.MatchesPlaid = new List<TicektBetsPlaid>();
                 user.TicketsPlaid.Add(ticketBet);
