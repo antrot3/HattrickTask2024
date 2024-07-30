@@ -1,5 +1,6 @@
 ﻿using Hattrick.Server.Models;
 using Hattrick.Server.Responses;
+using Hattrick.Server.Service;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Hattrick.Server.Controllers
@@ -8,10 +9,26 @@ namespace Hattrick.Server.Controllers
     [Route("[controller]")]
     public class UserController : Controller
     {
-        public HattrickDbContext _context { get; set; }
-        public UserController(HattrickDbContext context)
+        private readonly IBetType _betTypesService;
+        private readonly ICoefficient _coefficientService;
+        private readonly IMatch _matchService;
+        private readonly ISports _sportsService;
+        private readonly ITopOffers _topOffersService;
+        private readonly IUser _userService;
+        private readonly ITicketService _ticketService;
+        private readonly IWalletTransactionService _walletTransactionService;
+
+        public UserController(IBetType betTypesService, ICoefficient coefficientService, IMatch matchService,
+            ISports sportsService, ITopOffers topOffersService, IUser userService, IWalletTransactionService walletTransaction, ITicketService ticketService)
         {
-            _context = context;
+            _sportsService = sportsService;
+            _topOffersService = topOffersService;
+            _betTypesService = betTypesService;
+            _coefficientService = coefficientService;
+            _matchService = matchService;
+            _userService = userService;
+            _ticketService = ticketService;
+            _walletTransactionService = walletTransaction;
         }
 
         [HttpGet]
@@ -20,18 +37,18 @@ namespace Hattrick.Server.Controllers
         {
             var user = new ReturnUserResponse()
             {
-                User = _context.Users.First(),
+                User = _userService.GetAll().First(),
                 WalletTransactionModels = new List<WalletTransactionModel>()
             };
 
-            var walletTransactionModels = _context.WalletTransactions.ToList();
+            var walletTransactionModels = _walletTransactionService.GetAll().ToList();
             foreach (var walletTransactionModel in walletTransactionModels.Where(x => x.UserId == user.User.Id))
             {
                 user.WalletTransactionModels.Add(walletTransactionModel);
             }
 
             user.TicketsPlaid = new List<TicektBets>();
-            foreach (var ticketPlaid in _context.Tickets.Where(x => x.UserId == user.User.Id))
+            foreach (var ticketPlaid in _ticketService.GetAll().Where(x => x.UserId == user.User.Id))
             {
                 var ticketBet = new TicektBets()
                 {
@@ -52,34 +69,32 @@ namespace Hattrick.Server.Controllers
         [Route("post")]
         public void Post([FromBody] decimal balanceToAdd)
         {
-            var user = _context.Users.First();
-            _context.WalletTransactions.Add(new WalletTransactionModel()
+            var user = _userService.GetAll().First();
+            _walletTransactionService.AddTransaction(new WalletTransactionModel()
             {
                 Amount = balanceToAdd,
                 TransactionType = "Add to wallet",
                 UserId = user.Id,
                 Date = DateTime.Now
             });
-            user.WalletBalance += balanceToAdd;
-            _context.SaveChanges();
+            _userService.AddBallance((double)balanceToAdd);
         }
 
         [HttpPost]
         [Route("DepositToBank")]
         public void DepositToBank([FromBody] decimal balanceToWithraw)
         {
-            var user = _context.Users.First();
+            var user = _userService.GetAll().First();
             if (user.WalletBalance > balanceToWithraw)
             {
-                _context.WalletTransactions.Add(new WalletTransactionModel()
+                _walletTransactionService.AddTransaction(new WalletTransactionModel()
                 {
                     Amount = balanceToWithraw,
                     TransactionType = "Deposit to bank",
                     UserId = user.Id,
                     Date = DateTime.Now
                 });
-                user.WalletBalance -= balanceToWithraw;
-                _context.SaveChanges();
+                _userService.RemoveBallance((double)balanceToWithraw);
             }
         }
     }

@@ -9,11 +9,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace Hattrick.Server.Migrations
+namespace ServiceLayer.Migrations
 {
     [DbContext(typeof(HattrickDbContext))]
-    [Migration("20240730092322_init")]
-    partial class init
+    [Migration("20240730232522_Initial")]
+    partial class Initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

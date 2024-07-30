@@ -1,8 +1,5 @@
 ﻿using Hattrick.Server.Models;
 using Microsoft.EntityFrameworkCore;
-using System.Net.Sockets;
-using System.Security.Cryptography;
-using System.Text.RegularExpressions;
 
 namespace Hattrick.Server
 {

@@ -246,10 +246,6 @@
             totalMultiplier(): number {
                 return this.selectedMatches.reduce((acc, odd) => acc * odd.odd, 1);
             },
-            onChange(event): void {
-                this.handlingCosts = this.betingAmount * 0.95;
-                this.potentialWinning = this.selectedMatches.reduce((acc, odd) => acc * odd.odd, 1) * this.handlingCosts;
-            },
 
         },
         created() {
@@ -264,6 +260,11 @@
                 else {
                     this.toggleIcon = 'See Rules';
                 }
+            },
+
+            onChange(event): void {
+                this.handlingCosts = this.betingAmount * 0.95;
+                this.potentialWinning = this.selectedMatches.reduce((acc, odd) => acc * odd.odd, 1) * this.handlingCosts;
             },
             async fetchData() {
                 this.loading = true;

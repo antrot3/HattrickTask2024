@@ -27,6 +27,7 @@
     <ProjectReference Include="..\hattrick.client\hattrick.client.esproj">
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
     </ProjectReference>
+    <ProjectReference Include="..\Hattrick.ServiceLayer\Hattrick.ServiceLayer.csproj" />
   </ItemGroup>
 
 </Project>

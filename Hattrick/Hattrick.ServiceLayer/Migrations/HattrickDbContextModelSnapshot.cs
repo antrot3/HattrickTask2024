@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace Hattrick.Server.Migrations
+namespace ServiceLayer.Migrations
 {
     [DbContext(typeof(HattrickDbContext))]
     partial class HattrickDbContextModelSnapshot : ModelSnapshot

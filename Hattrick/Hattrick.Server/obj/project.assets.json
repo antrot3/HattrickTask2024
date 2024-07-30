@@ -963,6 +963,21 @@
         "build": {
           "buildTransitive/netcoreapp3.1/_._": {}
         }
+      },
+      "Hattrick.ServiceLayer/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v8.0",
+        "dependencies": {
+          "Microsoft.EntityFrameworkCore": "8.0.7",
+          "Microsoft.EntityFrameworkCore.Relational": "8.0.7",
+          "Pomelo.EntityFrameworkCore.MySql": "8.0.2"
+        },
+        "compile": {
+          "bin/placeholder/Hattrick.ServiceLayer.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Hattrick.ServiceLayer.dll": {}
+        }
       }
     }
   },
@@ -2703,10 +2718,16 @@
         "system.threading.channels.nuspec",
         "useSharedDesignerContext.txt"
       ]
+    },
+    "Hattrick.ServiceLayer/1.0.0": {
+      "type": "project",
+      "path": "../Hattrick.ServiceLayer/Hattrick.ServiceLayer.csproj",
+      "msbuildProject": "../Hattrick.ServiceLayer/Hattrick.ServiceLayer.csproj"
     }
   },
   "projectFileDependencyGroups": {
     "net8.0": [
+      "Hattrick.ServiceLayer >= 1.0.0",
       "Microsoft.AspNetCore.SpaProxy >= 8.*-*",
       "Microsoft.EntityFrameworkCore >= 8.0.7",
       "Microsoft.EntityFrameworkCore.Design >= 8.0.7",
@@ -2746,7 +2767,11 @@
       "frameworks": {
         "net8.0": {
           "targetAlias": "net8.0",
-          "projectReferences": {}
+          "projectReferences": {
+            "C:\\Users\\anter\\OneDrive\\Desktop\\Github\\HattrickTask2024\\Hattrick\\Hattrick.ServiceLayer\\Hattrick.ServiceLayer.csproj": {
+              "projectPath": "C:\\Users\\anter\\OneDrive\\Desktop\\Github\\HattrickTask2024\\Hattrick\\Hattrick.ServiceLayer\\Hattrick.ServiceLayer.csproj"
+            }
+          }
         }
       },
       "warningProperties": {

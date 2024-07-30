@@ -134,3 +134,5 @@ C:\Users\anter\OneDrive\Desktop\Github\HattrickTask2024\Hattrick\Hattrick.Server
 C:\Users\anter\OneDrive\Desktop\Github\HattrickTask2024\Hattrick\Hattrick.ServerTests\obj\Debug\net8.0\Hattrick.ServerTests.pdb
 C:\Users\anter\OneDrive\Desktop\Github\HattrickTask2024\Hattrick\Hattrick.ServerTests\obj\Debug\net8.0\Hattrick.ServerTests.genruntimeconfig.cache
 C:\Users\anter\OneDrive\Desktop\Github\HattrickTask2024\Hattrick\Hattrick.ServerTests\obj\Debug\net8.0\ref\Hattrick.ServerTests.dll
+C:\Users\anter\OneDrive\Desktop\Github\HattrickTask2024\Hattrick\Hattrick.ServerTests\bin\Debug\net8.0\Hattrick.ServiceLayer.dll
+C:\Users\anter\OneDrive\Desktop\Github\HattrickTask2024\Hattrick\Hattrick.ServerTests\bin\Debug\net8.0\Hattrick.ServiceLayer.pdb

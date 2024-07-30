@@ -1,5 +1,6 @@
 ﻿using Hattrick.Server.Models;
 using Hattrick.Server.Responses;
+using Hattrick.Server.Service;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Net;
@@ -8,16 +9,16 @@ namespace Hattrick.Server.HelperMethods
 {
     public class Helper
     {
-        public static void AddtoWallet(double potentialWin, UserModel user, HattrickDbContext context)
+        public static void AddtoWallet(double potentialWin, IUser user, IWalletTransactionService walletTransaction)
         {
-            context.WalletTransactions.Add(new WalletTransactionModel
+            walletTransaction.AddTransaction(new WalletTransactionModel
             {
                 Amount = (decimal)potentialWin,
                 TransactionType = "Bet Won",
-                UserId = user.Id,
+                UserId = user.GetAll().First().Id,
                 Date = DateTime.Now
             });
-            user.WalletBalance += (decimal)potentialWin;
+            user.AddBallance(potentialWin);
         }
         public static TicketModel CreateTicket(double totalOdds, double removeFromWallet, double potentialWin, UserModel user)
         {
@@ -32,17 +33,17 @@ namespace Hattrick.Server.HelperMethods
                 DidBetWin = false
             };
         }
-        public static void RemoveFromWallet(double removeFromWallet, UserModel user, HattrickDbContext context)
+        public static void RemoveFromWallet(double removeFromWallet, IUser user, IWalletTransactionService walletTransaction)
         {
-            context.WalletTransactions.Add(new WalletTransactionModel
+            walletTransaction.AddTransaction(new WalletTransactionModel
             {
                 Amount = (decimal)removeFromWallet,
                 TransactionType = "Bet",
-                UserId = user.Id,
+                UserId = user.GetAll().First().Id,
                 Date = DateTime.Now
             });
 
-            user.WalletBalance -= (decimal)removeFromWallet;
+            user.RemoveBallance(removeFromWallet);
         }
         // For easier testing, we set chances to be 50% 50%
         public static void CalculateChancesOfWinning(TicketModel model, Random rnd)

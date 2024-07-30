@@ -4,10 +4,10 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace Hattrick.Server.Migrations
+namespace ServiceLayer.Migrations
 {
     /// <inheritdoc />
-    public partial class init : Migration
+    public partial class Initial : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -267,7 +267,7 @@ namespace Hattrick.Server.Migrations
                 table: "WalletTransactions",
                 column: "UserId");
 
-            var sqlFile = Path.Combine("Migrations/Scripts/PopulateTestData.Sql");
+            var sqlFile = Path.Combine("../Hattrick.ServiceLayer/Migrations/Scripts/PopulateTestData.Sql");
             migrationBuilder.Sql(File.ReadAllText(sqlFile));
         }
 
