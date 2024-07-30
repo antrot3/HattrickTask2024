@@ -5,9 +5,7 @@ namespace Hattrick.Server.Responses
     public class ReturnUserResponse
     {
         public UserModel User { get; set; }
-
         public List<WalletTransactionModel> WalletTransactionModels { get; set; }
-
         public List<TicektBets> TicketsPlaid { get; set; }
     }
 

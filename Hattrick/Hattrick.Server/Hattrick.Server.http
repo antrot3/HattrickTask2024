@@ -1,6 +1,6 @@
-@Hattrick.Server_HostAddress = http://localhost:5076
+# @Hattrick.Server_HostAddress = http://localhost:5076
 
-GET {{Hattrick.Server_HostAddress}}/weatherforecast/
-Accept: application/json
+# GET {{Hattrick.Server_HostAddress}}/
+# Accept: application/json
 
 ###

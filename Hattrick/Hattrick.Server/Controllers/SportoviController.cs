@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Hattrick.Server.Controllers
 {
-
     [ApiController]
     [Route("[controller]")]
     public class SportoviController : Controller
@@ -14,20 +13,19 @@ namespace Hattrick.Server.Controllers
             _context = context;
         }
 
-        [HttpGet(Name = "GetSports")]
+        [HttpGet]
         [Route("get")]
         public IEnumerable<SportModel> Index()
         {
             return _context.Sports.ToList();
         }
 
-        [HttpPost(Name = "AddSport")]
+        [HttpPost]
         [Route("post")]
         public void AddSport([FromBody] string name)
         {
             _context.Sports.Add(new SportModel() { Name = name });
             _context.SaveChanges();
         }
-
     }
 }

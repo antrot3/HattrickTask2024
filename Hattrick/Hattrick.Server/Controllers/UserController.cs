@@ -1,7 +1,6 @@
 ﻿using Hattrick.Server.Models;
 using Hattrick.Server.Responses;
 using Microsoft.AspNetCore.Mvc;
-using System.Collections.Generic;
 
 namespace Hattrick.Server.Controllers
 {
@@ -15,13 +14,13 @@ namespace Hattrick.Server.Controllers
             _context = context;
         }
 
-        [HttpGet(Name = "GetUsers")]
+        [HttpGet]
         [Route("get")]
         public ReturnUserResponse Index()
         {
             var user = new ReturnUserResponse()
             {
-                User = _context.Users.FirstOrDefault(),
+                User = _context.Users.First(),
                 WalletTransactionModels = new List<WalletTransactionModel>()
             };
 
@@ -49,11 +48,11 @@ namespace Hattrick.Server.Controllers
             return user;
         }
 
-        [HttpPost(Name = "AddToWallet")]
+        [HttpPost]
         [Route("post")]
         public void Post([FromBody] decimal balanceToAdd)
         {
-            var user = _context.Users.FirstOrDefault();
+            var user = _context.Users.First();
             _context.WalletTransactions.Add(new WalletTransactionModel()
             {
                 Amount = balanceToAdd,
@@ -65,11 +64,11 @@ namespace Hattrick.Server.Controllers
             _context.SaveChanges();
         }
 
-        [HttpPost(Name = "DepositToBank")]
+        [HttpPost]
         [Route("DepositToBank")]
         public void DepositToBank([FromBody] decimal balanceToWithraw)
         {
-            var user = _context.Users.FirstOrDefault();
+            var user = _context.Users.First();
             if (user.WalletBalance > balanceToWithraw)
             {
                 _context.WalletTransactions.Add(new WalletTransactionModel()
@@ -83,6 +82,5 @@ namespace Hattrick.Server.Controllers
                 _context.SaveChanges();
             }
         }
-
     }
 }
