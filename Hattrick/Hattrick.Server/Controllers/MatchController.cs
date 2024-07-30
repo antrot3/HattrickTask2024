@@ -1,4 +1,5 @@
-﻿using Hattrick.Server.HelperMethods;
+﻿using Hattrick.Server.Controllers.Interfaces;
+using Hattrick.Server.HelperMethods;
 using Hattrick.Server.Models;
 using Hattrick.Server.Requests;
 using Hattrick.Server.Responses;
@@ -10,7 +11,7 @@ namespace Hattrick.Server.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class MatchController : Controller
+    public class MatchController : Controller, IMatchController
     {
         private readonly IBetType _betTypesService;
         private readonly ICoefficient _coefficientService;

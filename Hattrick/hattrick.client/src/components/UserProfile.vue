@@ -65,7 +65,8 @@
     </div>
 </template>
 
-<script lang="ts">import { defineComponent } from 'vue';
+<script lang="ts">
+    import { defineComponent } from 'vue';
 
     type User = {
         walletBalance: number;
@@ -74,11 +75,11 @@
     };
 
     type Ticket = {
-    totalOdd: number;
-    stake: string;
-    potentialWinning: string;
-    isBetPlayed: bool;
-    didBetWin: bool;
+        totalOdd: number;
+        stake: string;
+        potentialWinning: string;
+        isBetPlayed: bool;
+        didBetWin: bool;
     };
 
     type Data = {
@@ -119,14 +120,14 @@
                     this.walletTransactionModels = data.walletTransactionModels
                     this.ticketsPlaid = data.ticketsPlaid
                 } catch (error) {
-                    console.error('Error fetching sports:', error);
+                    console.error('Error fetching user data:', error);
                 } finally {
                     this.loading = false;
                 }
             },
             async addBalance() {
-                 if (this.addToBallance <= 0) {
-                    alert("The balance to be added cannot be negative or 0.");
+                if (this.addToBallance <= 0) {
+                    alert("The ammount to add can not be negative or 0.");
                     return;
                 }
                 try {
@@ -138,35 +139,35 @@
                     if (!response.ok) {
                         throw new Error(`HTTP error! status: ${response.status}`);
                     }
-                    location. reload();
+                    location.reload();
                 } catch (error) {
                     console.error('Error adding sport:', error);
                 }
             },
             async withdrwFounds() {
-               if (this.withdrwBalance <= 0) {
-                  alert("The balance to be added cannot be negative or 0.");
-                  return;
-              }
-              if (this.user.walletBalance < this.withdrwBalance) {
-                  alert("You can not withdraw more than you have");
-                  return;
-              }
+                if (this.withdrwBalance <= 0) {
+                    alert("The ammount to add can not be negative or 0.");
+                    return;
+                }
+                if (this.user.walletBalance < this.withdrwBalance) {
+                    alert("You can not withdraw more than you have");
+                    return;
+                }
 
-              try {
-                  const response = await fetch('https://localhost:7020/User/DepositToBank', {
-                      method: 'POST',
-                      headers: { 'Content-Type': 'application/json' },
-                      body: JSON.stringify(this.withdrwBalance),
-                  });
-                  if (!response.ok) {
-                      throw new Error(`HTTP error! status: ${response.status}`);
-                  }
-                location. reload();
-              } catch (error) {
-                  console.error('Error adding sport:', error);
-              }
-          },
+                try {
+                    const response = await fetch('https://localhost:7020/User/DepositToBank', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(this.withdrwBalance),
+                    });
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! status: ${response.status}`);
+                    }
+                    location.reload();
+                } catch (error) {
+                    console.error('Error adding sport:', error);
+                }
+            },
         },
     });</script>
 
@@ -174,6 +175,7 @@
     table {
         width: 100%;
     }
+
     th {
         font-weight: bold;
     }
