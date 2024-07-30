@@ -1,9 +1,8 @@
-﻿using Hattrick.Server.Responses;
+﻿using Hattrick.Server.Models;
+using Hattrick.Server.Requests;
+using Hattrick.Server.Responses;
 using Microsoft.AspNetCore.Mvc;
-using System.Linq;
-using static System.Runtime.InteropServices.JavaScript.JSType;
-using System.Security.Cryptography;
-using Hattrick.Server.Models;
+using System.Net;
 
 namespace Hattrick.Server.Controllers
 {
@@ -12,6 +11,7 @@ namespace Hattrick.Server.Controllers
     public class MatchController : Controller
     {
         public HattrickDbContext _context { get; set; }
+
         public MatchController(HattrickDbContext context)
         {
             _context = context;
@@ -22,99 +22,109 @@ namespace Hattrick.Server.Controllers
         public IEnumerable<MatchResponse> Index()
         {
             var response = new List<MatchResponse>();
-            var coeficients = _context.coeficient.ToList();
+            var coefficients = _context.Coefficient.ToList();
             var matches = _context.Matches.ToList();
             var betTypes = _context.BetTypes.ToList();
             var sports = _context.Sports.ToList();
             var topOfferModels = _context.TopOffers.ToList();
-            var user = _context.Users.First();
 
-            foreach (var coeficient in coeficients)
+            foreach (var coefficient in coefficients)
             {
-                coeficient.BetType = betTypes.First(x => x.Id == coeficient.BetTypeId);
+                coefficient.BetType = betTypes.First(x => x.Id == coefficient.BetTypeId);
             }
 
             foreach (var match in matches)
             {
-                var toAdd = new MatchResponse();
-                toAdd.Id = match.Id;
-                toAdd.TeamAway = match.TeamAway;
-                toAdd.TeamHome = match.TeamHome;
-                toAdd.Date = match.Date;
-                toAdd.SportName = sports.First(x => x.Id == match.SportId).Name;
-                toAdd.OddValue1 = coeficients.Where(x => x.MatchId == match.Id && x.BetType.Name == "1").Select(x => x.OddValue).FirstOrDefault(1);
-                toAdd.OddValue2 = coeficients.Where(x => x.MatchId == match.Id && x.BetType.Name == "2").Select(x => x.OddValue).FirstOrDefault(1);
-                toAdd.OddValuex = coeficients.Where(x => x.MatchId == match.Id && x.BetType.Name == "X").Select(x => x.OddValue).FirstOrDefault(1);
-                toAdd.OddValue1x = coeficients.Where(x => x.MatchId == match.Id && x.BetType.Name == "1X").Select(x => x.OddValue).FirstOrDefault(1);
-                toAdd.OddValue2x = coeficients.Where(x => x.MatchId == match.Id && x.BetType.Name == "X2").Select(x => x.OddValue).FirstOrDefault(1);
-                toAdd.OddValue12 = coeficients.Where(x => x.MatchId == match.Id && x.BetType.Name == "12").Select(x => x.OddValue).FirstOrDefault(1);
-                toAdd.TopDescription = topOfferModels.Where(x => x.MatchId == match.Id).Select(x => x.ConditionDescription).FirstOrDefault("Does Not Exist");
-                toAdd.OddValue = topOfferModels.Where(x => x.MatchId == match.Id).Select(x => x.OddValue).FirstOrDefault(1);
+                var toAdd = new MatchResponse
+                {
+                    Id = match.Id,
+                    TeamAway = match.TeamAway,
+                    TeamHome = match.TeamHome,
+                    Date = match.Date,
+                    SportName = sports.First(x => x.Id == match.SportId).Name,
+                    OddValue1 = coefficients.FirstOrDefault(x => x.MatchId == match.Id && x.BetType.Name == "1")?.OddValue ?? 1,
+                    OddValue2 = coefficients.FirstOrDefault(x => x.MatchId == match.Id && x.BetType.Name == "2")?.OddValue ?? 1,
+                    OddValuex = coefficients.FirstOrDefault(x => x.MatchId == match.Id && x.BetType.Name == "X")?.OddValue ?? 1,
+                    OddValue1x = coefficients.FirstOrDefault(x => x.MatchId == match.Id && x.BetType.Name == "1X")?.OddValue ?? 1,
+                    OddValue2x = coefficients.FirstOrDefault(x => x.MatchId == match.Id && x.BetType.Name == "X2")?.OddValue ?? 1,
+                    OddValue12 = coefficients.FirstOrDefault(x => x.MatchId == match.Id && x.BetType.Name == "12")?.OddValue ?? 1,
+                    TopOfferMultiplier = topOfferModels.FirstOrDefault(x => x.MatchId == match.Id)?.OddMultiplier ?? 1
+                };
+
                 response.Add(toAdd);
             }
+
             return response;
         }
 
         [HttpPost("post")]
-        [Route("post")]
-        public IActionResult Post([FromBody] MatchRequst matchRequst)
+        public IActionResult Post([FromBody] MatchRequest matchRequest)
         {
-            var removeFromWallet = matchRequst.BetAmmount;
+            var removeFromWallet = matchRequest.BetAmount;
             var afterTaxValue = removeFromWallet * 0.95;
 
-            if (matchRequst.SelectedOdds == null || matchRequst.SelectedOdds.Count == 0)
+            if (matchRequest.SelectedOdds == null || !matchRequest.SelectedOdds.Any())
             {
-                return BadRequest("No odds selected");
-            }
-            double totalOds = 1;
-            foreach (var value in matchRequst.SelectedOdds)
-                totalOds = totalOds * value.Odd;
-            var potentialWin = afterTaxValue * totalOds;
-
-            if (_context.Users.First().WalletBalance < (decimal)removeFromWallet)
-                return BadRequest("You can not bet more then your wallet ballance, Go to user Profile and add founs");
-            if (matchRequst.SelectedOdds.Where(x => x.HasTopOffer == true).Count() > 1)
-                return BadRequest("You can not select multiple top offer matches");
-
-            if (matchRequst.SelectedOdds.Where(x => x.HasTopOffer == true).Count() == 1)
-            {
-                if (matchRequst.SelectedOdds.Where(x => x.Odd > 1.1).Count() <= 5)
-                    return BadRequest("You selected top offer you need 5 or more non top offer pairs with odds grater then 1.1");
+                return Result(HttpStatusCode.BadRequest, "No odds selected.");
             }
 
-            var user = _context.Users.FirstOrDefault();
-            _context.WalletTransactions.Add(new WalletTransactionModel()
+            double totalOdds = 1;
+            foreach (var value in matchRequest.SelectedOdds)
+            {
+                totalOdds *= value.Odd;
+            }
+
+            var potentialWin = afterTaxValue * totalOdds;
+            var user = _context.Users.First();
+
+            if (user.WalletBalance < (decimal)removeFromWallet)
+            {
+                return Result(HttpStatusCode.BadRequest, "You can not bet more than your wallet balance. Go to the user profile and add funds.");
+            }
+
+            if (matchRequest.SelectedOdds.Count(x => x.IsTopOffer) > 1)
+            {
+                return Result(HttpStatusCode.BadRequest, "You cannot select multiple top offer matches.");
+            }
+
+            if (matchRequest.SelectedOdds.Count(x => x.IsTopOffer) == 1 &&
+                matchRequest.SelectedOdds.Count(x => x.Odd > 1.1 && !x.IsTopOffer) < 5)
+            {
+                return Result(HttpStatusCode.BadRequest, "You selected a top offer. You need 5 or more non-top offer pairs with odds greater than 1.1.");
+            }
+
+            _context.WalletTransactions.Add(new WalletTransactionModel
             {
                 Amount = (decimal)removeFromWallet,
                 TransactionType = "Bet",
-                UserId = _context.Users.First().Id,
+                UserId = user.Id,
                 Date = DateTime.Now
             });
 
             user.WalletBalance -= (decimal)removeFromWallet;
 
-            var model = new TicketModel()
+            var ticket = new TicketModel
             {
                 Stake = (decimal)removeFromWallet,
                 Date = DateTime.Now,
-                TotalOdd = (decimal)totalOds,
-                UserId = _context.Users.First().Id,
+                TotalOdd = (decimal)totalOdds,
+                UserId = user.Id,
                 IsBetPlayed = true,
                 PotentialWinning = (decimal)potentialWin,
-                DidBetWin = false,
+                DidBetWin = false
             };
 
-            Random rnd = new Random();
-            CalculateChancesOfWinning(model, rnd);
-            _context.Tickets.Add(model);
+            var rnd = new Random();
+            CalculateChancesOfWinning(ticket, rnd);
+            _context.Tickets.Add(ticket);
 
-            if (model.DidBetWin)
+            if (ticket.DidBetWin)
             {
-                _context.WalletTransactions.Add(new WalletTransactionModel()
+                _context.WalletTransactions.Add(new WalletTransactionModel
                 {
                     Amount = (decimal)potentialWin,
                     TransactionType = "Bet Won",
-                    UserId = _context.Users.First().Id,
+                    UserId = user.Id,
                     Date = DateTime.Now
                 });
                 user.WalletBalance += (decimal)potentialWin;
@@ -122,32 +132,20 @@ namespace Hattrick.Server.Controllers
 
             _context.SaveChanges();
 
-            if (model.DidBetWin)
-                return Ok("Ticket is played, you won");
-            else
-                return Ok("Ticket is played, you lost");
+            return Result(ticket.DidBetWin ? HttpStatusCode.OK : HttpStatusCode.UnprocessableContent, ticket.DidBetWin ? "Ticket played, you won." : "Ticket played, you lost.");
         }
 
-        //For easier testing i set chances to be 50% 50%
+        private static IActionResult Result(HttpStatusCode statusCode, string reason) => new ContentResult
+        {
+            StatusCode = (int)statusCode,
+            Content = $"Status Code: {(int)statusCode}; {statusCode}; {reason}",
+            ContentType = "text/plain"
+        };
+
+        // For easier testing, we set chances to be 50% 50%
         private void CalculateChancesOfWinning(TicketModel model, Random rnd)
         {
-            if (rnd.Next(1, 3) == 1)
-                model.DidBetWin = true;
+            model.DidBetWin = rnd.Next(1, 3) == 2;
         }
-    }
-    public class MatchRequst()
-    {
-        public double BetAmmount { get; set; }
-        public List<SelectedValues> SelectedOdds { get; set; }
-    }
-
-    public class SelectedValues()
-    {
-        public int Id { get; set; }
-        public bool HasTopOffer { get; set; }
-        public string OddType { get; set; }
-        public double Odd { get; set; }
-        public string TeamHome { get; set; }
-        public string TeamAway { get; set; }
     }
 }

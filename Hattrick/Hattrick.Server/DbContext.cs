@@ -15,7 +15,7 @@ namespace Hattrick.Server
         public DbSet<UserModel> Users { get; set; }
         public DbSet<MatchModel> Matches { get; set; }
         public DbSet<BetTypeModel> BetTypes { get; set; }
-        public DbSet<CoeficientModel> coeficient { get; set; }
+        public DbSet<CoefficientModel> Coefficient { get; set; }
         public DbSet<TopOfferModel> TopOffers { get; set; }
         public DbSet<WalletTransactionModel> WalletTransactions { get; set; }
         public DbSet<TicketModel> Tickets { get; set; }

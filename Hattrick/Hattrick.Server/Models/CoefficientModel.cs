@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Hattrick.Server.Models
 {
-    public class CoeficientModel
+    public class CoefficientModel
     {
         [Key]
         public int Id { get; set; }

@@ -31,8 +31,8 @@ INSERT INTO bettypes (name, description) VALUES
 ('X2', 'Draw or Away Win'),
 ('12', 'Home or Away Win');
 
--- Insert into coeficient
-INSERT INTO coeficient (matchid, bettypeid, oddvalue) VALUES
+-- Insert into coefficient
+INSERT INTO coefficient (matchid, bettypeid, oddvalue) VALUES
 (1, 1, 1.5),
 (1, 2, 2.5),
 (1, 3, 3.0),
@@ -67,10 +67,9 @@ INSERT INTO coeficient (matchid, bettypeid, oddvalue) VALUES
 (9, 2, 1.47);
 
 -- Insert into top_offers
-INSERT INTO topoffers (matchid, conditiondescription, oddvalue) VALUES
-(1, 'Zabija se vise od 5 golova po utakmici', 3.57),
-(2, 'Zabija se manje od 7 golova po utakmici', 4.39),
-(3, 'Zabija se manje od 3 golova po utakmici', 2.39);
+INSERT INTO topoffers (matchid, oddmultiplier) VALUES
+(1, 1.4),
+(2, 1.5);
 
 -- Insert into tickets
 INSERT INTO tickets (userid, totalodd, stake, potentialwinning, date, isbetplayed, didbetwin) VALUES

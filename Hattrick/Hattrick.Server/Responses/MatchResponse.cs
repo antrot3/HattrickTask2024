@@ -16,7 +16,7 @@
         public decimal OddValue2x { get; set; }
         public decimal OddValue12 { get; set; }
         public string TopDescription { get; set; }
-        public decimal OddValue { get; set; }
+        public decimal TopOfferMultiplier { get; set; }
         public decimal WalletBalance { get; set; }
 
     }
