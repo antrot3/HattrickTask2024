@@ -1,26 +1,41 @@
 <template>
     <div class="sports-component">
         <h1 style="padding:2rem">User Profile</h1>
-
+        <div class="header-row" id="header-row" style="padding: 0px; overflow: hidden; height: 28rem;">
+            <div class="container-fluid" style="padding: 0px;">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <a class="navbar-brand logo">
+                            <img src="../assets/UserProfile.jpg" style="width: 100%;">
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
         <div v-if="loading" class="loading">
             Loading... Please wait.
         </div>
 
         <div v-if="!loading">
-            <h1>
-                {{ user.name }} Current ballance {{ user.walletBalance.toFixed(2)  }} Euro
-            </h1>
-
-            <input class="input-group input-group-lg" v-model="addToBallance" placeholder="Add  to Wallet" type="number" min="0" step=".01" />
-            <button @click="addBalance" class="btn btn-primary">Add to Wallet</button>
-            <br />
-            <br />
-            <br />
-            <input class="input-group input-group-lg" v-model="withdrwBalance" placeholder="Deposit to bank" type="number" min="0" step=".01" />
-            <button style="margin:2rem" @click="withdrwFounds" class="btn btn-primary">Deposit to Bank</button>
-            <div class="datatable-container">
+            <div class="container">
+                <h1 style="padding-top:3rem; text-align:center">
+                    {{ user.name }} Current wallet ballance {{ user.walletBalance.toFixed(2)  }} Euro
+                </h1>
+            </div>
+            <div class="container">
+                <img style="height: 17rem; padding-left: 38%" src="../assets/Wallet.png">
+            </div>
+            <div class="container">
+                <div class="d-flex justify-content-center">
+                    <input v-model="addToBallance" placeholder="Add  to Wallet" type="number" min="0" step=".01" />
+                    <button @click="addBalance" style="margin-right: 2rem; margin-left: 2rem" class="btn btn-primary">Add to Wallet</button>
+                    <input v-model="withdrwBalance" placeholder="Deposit to bank" type="number" min="0" step=".01" />
+                    <button @click="withdrwFounds" style="margin-right: 2rem; margin-left: 2rem" class="btn btn-primary">Deposit to Bank</button>
+                </div>
+            </div>
+            <div class="datatable-container" style="padding-top:7rem; text-align:center">
                 <h1> Transaction history</h1>
-                <table class="table table-hover">
+                <table class="table table-hover" style="height:4rem; overflow-y:auto">
                     <thead>
                         <tr>
                             <th>Amount</th>
@@ -36,7 +51,7 @@
                 </table>
             </div>
 
-            <div style="padding-top:50px" class="datatable-container">
+            <div style="padding-top:3rem; text-align:center" class="datatable-container">
                 <h1>Bet history</h1>
                 <table>
                     <thead>
@@ -44,7 +59,6 @@
                             <th>Total odds</th>
                             <th>Stake/ Money on bet</th>
                             <th>Potential winning</th>
-                            <th>Is Bet played</th>
                             <th>Did it win</th>
                         </tr>
                     </thead>
@@ -53,7 +67,6 @@
                             <td>{{ ticket.totalOdd.toFixed(2)  }}</td>
                             <td>{{ ticket.stake.toFixed(2)}} Euro</td>
                             <td>{{ ticket.potentialWinning.toFixed(2)}} Euro</td>
-                            <td>{{ ticket.isBetPlayed }}</td>
                             <td>{{ ticket.didBetWin }}</td>
                         </tr>
                     </tbody>
@@ -170,6 +183,10 @@
     });</script>
 
 <style scoped>
+    input, button {
+        vertical-align: middle;
+    }
+
     table {
         width: 100%;
     }

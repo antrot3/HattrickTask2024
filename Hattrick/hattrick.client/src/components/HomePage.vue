@@ -1,5 +1,6 @@
 <template>
     <div class="betting-component">
+
         <div class="section">
             <div :class="[isActive ? 'active' : '', 'collapsible']" @click="toggle">
                 Rules
@@ -31,7 +32,17 @@
             Loading... Please refresh once the ASP.NET backend has started. See
             <a href="https://aka.ms/jspsintegrationvue">https://aka.ms/jspsintegrationvue</a> for more details.
         </div>
-
+        <div class="header-row" id="header-row" style="padding: 0px; overflow: hidden; height: 28rem;">
+            <div class="container-fluid" style="padding: 0px;">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <a class="navbar-brand logo">
+                            <img src="../assets/Home.jpg"  style="width: 100%;">
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
         <div v-for="(sportMatches, sportName) in topOfferMatches" :key="sportName" style="padding-bottom: 5rem; padding-top: 5rem">
             <div class="datatable-container">
                 <h2>Top offer table</h2>
@@ -151,9 +162,9 @@
 
         <div class="multiplier-info" v-if="selectedOddsCount > 0">
             <p>Multiplier of selected odds: {{ totalMultiplier.toFixed(2)  }}</p>
-            <input v-model="betingAmount" placeholder="How much do you want to bet" type="number" min="0" value="1" @change="onChange($event)" />
+            <input v-model="betingAmount" placeholder="How much do you want to bet" type="number" min="0" value="1" @change="onChange($event)" /> Euros
             <p>How much are you bettin after handling costs of 5%: {{ handlingCosts.toFixed(2)  }}</p>
-            <p>Pottential Winning {{ potentialWinning.toFixed(2)  }}</p>
+            <p>Pottential Winning (Click to calculate): {{ potentialWinning.toFixed(2)}} Euros</p>
             <button @click="submitBets">Submit Ticket</button>
         </div>
     </div>

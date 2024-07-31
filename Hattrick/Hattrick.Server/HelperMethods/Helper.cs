@@ -1,8 +1,7 @@
-﻿using Hattrick.ServiceLayer.Models;
-using Hattrick.Server.Responses;
+﻿using Hattrick.Server.Responses;
+using Hattrick.ServiceLayer.Models;
 using Hattrick.ServiceLayer.Service;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using System.Net;
 
 namespace Hattrick.Server.HelperMethods
