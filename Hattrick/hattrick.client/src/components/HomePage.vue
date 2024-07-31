@@ -8,20 +8,20 @@
             </div>
             <div v-show="isActive">
                 <p>
-                    Each pair has picks*, each of which has its own odds, which is >= 1.0
-                    Some pairs have odds-free picks that can't be bet on.
-                    There is a certain category of top offers in which the already existing ones are singled out.
+                    Each pair has picks*, each of which has its own odds, which is >= 1.0<br />
+                    Some pairs have odds-free picks that can't be bet on.<br />
+                    There is a certain category of top offers in which the already existing ones are singled out.<br />
                     Pairs with better odds
                     <br />
-                    The wallet balance can't go below 0.
+                    The wallet balance can't go below 0.<br />
                     o The User can deposit funds into their wallet
                     <br>
                     The player selects a tip* on the matches he wants to bet on
-                    o Calculating the total quota of tickets
-                    o 5% handling costs are deducted from the player's bet amount for each ticket
-                    Pairs of top offers cannot be combined with each other
-                    If a pair is paid as a top bid, the same pair cannot be played as part of a regular bid.
-                    offers and vice versa.
+                    o Calculating the total quota of tickets<br />
+                    o 5% handling costs are deducted from the player's bet amount for each ticket<br />
+                    o Pairs of top offers cannot be combined with each other <br />
+                    o If a pair is paid as a top bid, the same pair cannot be played as part of a regular bid.
+                    offers and vice versa. <br />
                     When paying for a ticket with a pair of top bids, the ticket must contain at least 5 more pairs
                     odds >= 1.1
                 </p>

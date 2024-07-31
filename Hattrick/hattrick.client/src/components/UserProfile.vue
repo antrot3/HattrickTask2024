@@ -26,53 +26,56 @@
                 <img style="height: 17rem; padding-left: 38%" src="../assets/Wallet.png">
             </div>
             <div class="container">
-                <div class="d-flex justify-content-center">
+                <div class="d-flex justify-content-center" style="padding-bottom:4rem">
                     <input v-model="addToBallance" placeholder="Add  to Wallet" type="number" min="0" step=".01" />
                     <button @click="addBalance" style="margin-right: 2rem; margin-left: 2rem" class="btn btn-primary">Add to Wallet</button>
+                </div>
+                <div class="d-flex justify-content-center">
                     <input v-model="withdrwBalance" placeholder="Deposit to bank" type="number" min="0" step=".01" />
                     <button @click="withdrwFounds" style="margin-right: 2rem; margin-left: 2rem" class="btn btn-primary">Deposit to Bank</button>
                 </div>
-            </div>
-            <div class="datatable-container" style="padding-top:7rem; text-align:center">
-                <h1> Transaction history</h1>
-                <table class="table table-hover" style="height:4rem; overflow-y:auto">
-                    <thead>
-                        <tr>
-                            <th>Amount</th>
-                            <th>Transaction description</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr v-for="transactions in walletTransactionModels" :key="transactions.amount">
-                            <td>{{ transactions.amount.toFixed(2)  }} Euro</td>
-                            <td>{{ transactions.transactionType }}</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
 
-            <div style="padding-top:3rem; text-align:center" class="datatable-container">
-                <h1>Bet history</h1>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Total odds</th>
-                            <th>Stake/ Money on bet</th>
-                            <th>Potential winning</th>
-                            <th>Did it win</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr v-for="ticket in ticketsPlaid" :key="ticket.totalOdd" :class="{ 'bg-success': ticket.didBetWin, 'bg-danger': !ticket.didBetWin}">
-                            <td>{{ ticket.totalOdd.toFixed(2)  }}</td>
-                            <td>{{ ticket.stake.toFixed(2)}} Euro</td>
-                            <td>{{ ticket.potentialWinning.toFixed(2)}} Euro</td>
-                            <td>{{ ticket.didBetWin }}</td>
-                        </tr>
-                    </tbody>
-                </table>
             </div>
-        </div>
+                <div class="datatable-container" style="padding-top:7rem; text-align:center">
+                    <h1> Transaction history</h1>
+                    <table class="table table-hover" style="height:4rem; overflow-y:auto">
+                        <thead>
+                            <tr>
+                                <th>Amount</th>
+                                <th>Transaction description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr v-for="transactions in walletTransactionModels" :key="transactions.amount">
+                                <td>{{ transactions.amount.toFixed(2)  }} Euro</td>
+                                <td>{{ transactions.transactionType }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div style="padding-top:3rem; text-align:center" class="datatable-container">
+                    <h1>Bet history</h1>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Total odds</th>
+                                <th>Stake/ Money on bet</th>
+                                <th>Potential winning</th>
+                                <th>Did it win</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr v-for="ticket in ticketsPlaid" :key="ticket.totalOdd" :class="{ 'bg-success': ticket.didBetWin, 'bg-danger': !ticket.didBetWin}">
+                                <td>{{ ticket.totalOdd.toFixed(2)  }}</td>
+                                <td>{{ ticket.stake.toFixed(2)}} Euro</td>
+                                <td>{{ ticket.potentialWinning.toFixed(2)}} Euro</td>
+                                <td>{{ ticket.didBetWin }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
     </div>
 </template>
 
