@@ -1,27 +1,10 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Hattrick.Server.Controllers;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Hattrick.Server.Requests;
-using Moq.EntityFrameworkCore;
+﻿using Hattrick.Server.Requests;
+using Hattrick.ServiceLayer.Models;
+using Hattrick.ServiceLayer.Service;
 using Moq;
-using Microsoft.EntityFrameworkCore;
-using Hattrick.Server.Models;
-using Hattrick.ServerTests;
-using MySqlConnector;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Infrastructure;
-using Microsoft.AspNetCore.Http;
-using Hattrick.Server.Service;
-using Hattrick.Server.Responses;
 
 namespace Hattrick.Server.Controllers.Tests
 {
-
-
     [TestClass]
     public class MatchControllerTests
     {

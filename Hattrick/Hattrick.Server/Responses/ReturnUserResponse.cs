@@ -1,4 +1,4 @@
-﻿using Hattrick.Server.Models;
+﻿using Hattrick.ServiceLayer.Models;
 
 namespace Hattrick.Server.Responses
 {

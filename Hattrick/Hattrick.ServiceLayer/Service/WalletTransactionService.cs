@@ -1,6 +1,6 @@
-﻿using Hattrick.Server.Models;
+﻿using Hattrick.ServiceLayer.Models;
 
-namespace Hattrick.Server.Service
+namespace Hattrick.ServiceLayer.Service
 {
     public interface IWalletTransactionService
     {

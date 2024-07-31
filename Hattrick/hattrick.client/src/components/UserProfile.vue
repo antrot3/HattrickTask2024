@@ -1,25 +1,23 @@
 <template>
     <div class="sports-component">
-        <h1>User Profile</h1>
+        <h1 style="padding:2rem">User Profile</h1>
 
         <div v-if="loading" class="loading">
             Loading... Please wait.
         </div>
 
         <div v-if="!loading">
-            <ul>
-                {{ user.name }}
+            <h1>
+                {{ user.name }} Current ballance {{ user.walletBalance.toFixed(2)  }} Euro
+            </h1>
 
-                {{ user.walletBalance.toFixed(2)  }} Euro
-            </ul>
-
-            <input v-model="addToBallance" placeholder="Add  to Wallet" type="number" min="0" />
-            <button @click="addBalance">Add to Wallet</button>
+            <input class="input-group input-group-lg" v-model="addToBallance" placeholder="Add  to Wallet" type="number" min="0" step=".01" />
+            <button @click="addBalance" class="btn btn-primary">Add to Wallet</button>
             <br />
             <br />
             <br />
-            <input v-model="withdrwBalance" placeholder="Deposit to bank" type="number" min="0" />
-            <button @click="withdrwFounds">Deposit to Bank</button>
+            <input class="input-group input-group-lg" v-model="withdrwBalance" placeholder="Deposit to bank" type="number" min="0" step=".01" />
+            <button style="margin:2rem" @click="withdrwFounds" class="btn btn-primary">Deposit to Bank</button>
             <div class="datatable-container">
                 <h1> Transaction history</h1>
                 <table class="table table-hover">
@@ -141,7 +139,7 @@
                     }
                     location.reload();
                 } catch (error) {
-                    console.error('Error adding sport:', error);
+                    console.error('Error posting to user:', error);
                 }
             },
             async withdrwFounds() {
@@ -165,7 +163,7 @@
                     }
                     location.reload();
                 } catch (error) {
-                    console.error('Error adding sport:', error);
+                    console.error('Error posting to user:', error);
                 }
             },
         },
@@ -210,5 +208,15 @@
     .multiplier-info {
         margin-top: 1rem;
         font-weight: bold;
+    }
+
+    input {
+        -moz-appearance: textfield;
+        font: inherit;
+        padding: .6em .9em;
+        border-radius: .6em;
+        border: 1px solid darkgray;
+        padding-inline: 2em .9em;
+        width: 10em;
     }
 </style>

@@ -1,7 +1,6 @@
-using Hattrick.Server;
-using Hattrick.Server.Service;
+using Hattrick.ServiceLayer;
+using Hattrick.ServiceLayer.Service;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 var builder = WebApplication.CreateBuilder(args);
 

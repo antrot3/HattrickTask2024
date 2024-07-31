@@ -1,6 +1,6 @@
-﻿using Hattrick.Server.Models;
+﻿using Hattrick.ServiceLayer.Models;
 using Hattrick.Server.Responses;
-using Hattrick.Server.Service;
+using Hattrick.ServiceLayer.Service;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Net;

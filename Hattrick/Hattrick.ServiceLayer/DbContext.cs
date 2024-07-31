@@ -1,7 +1,7 @@
-﻿using Hattrick.Server.Models;
+﻿using Hattrick.ServiceLayer.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace Hattrick.Server
+namespace Hattrick.ServiceLayer
 {
     public class HattrickDbContext : DbContext
     {

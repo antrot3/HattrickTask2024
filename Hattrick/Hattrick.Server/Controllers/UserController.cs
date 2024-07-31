@@ -1,6 +1,6 @@
-﻿using Hattrick.Server.Models;
+﻿using Hattrick.ServiceLayer.Models;
 using Hattrick.Server.Responses;
-using Hattrick.Server.Service;
+using Hattrick.ServiceLayer.Service;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Hattrick.Server.Controllers
@@ -19,13 +19,13 @@ namespace Hattrick.Server.Controllers
         private readonly IWalletTransactionService _walletTransactionService;
 
         public UserController(IBetType betTypesService, ICoefficient coefficientService, IMatch matchService,
-            ISports sportsService, ITopOffers topOffersService, IUser userService, IWalletTransactionService walletTransaction, ITicketService ticketService)
+            ISports sportsService, ITopOffers topOffersService, IUser userService, ITicketService ticketService, IWalletTransactionService walletTransaction)
         {
-            _sportsService = sportsService;
-            _topOffersService = topOffersService;
             _betTypesService = betTypesService;
             _coefficientService = coefficientService;
             _matchService = matchService;
+            _sportsService = sportsService;
+            _topOffersService = topOffersService;
             _userService = userService;
             _ticketService = ticketService;
             _walletTransactionService = walletTransaction;

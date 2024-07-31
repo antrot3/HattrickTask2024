@@ -1,6 +1,5 @@
 ﻿namespace Hattrick.Server.Requests
 {
-
     public class MatchRequest()
     {
         public double BetAmount { get; set; }

@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Hattrick.Server.Models
+namespace Hattrick.ServiceLayer.Models
 {
     public interface IUserModel
     {

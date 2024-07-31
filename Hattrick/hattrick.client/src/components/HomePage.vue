@@ -76,7 +76,7 @@
                                 {{ (match.oddValue2x * match.topOfferMultiplier).toFixed(2) }}
                             </td>
                             <td>
-                                <input type="radio" :name="'SpecialOffer oddValue12-' + match.id" v-model="selectedOdds[match.id]" :value="{ isTopOffer:true,  id:match.id, oddType: '12', odd: (match.oddValue12* match.topOfferMultiplier).toFixed(2), teamHome: match.teamHome, teamAway: match.teamAway }" :disabled="match.oddValue12 === 1" @mousedown="onChangeSpecialOffer($event)" />
+                                <input type="radio" :name="'SpecialOffer oddValue12-' + match.id" v-model="selectedOdds[match.id]" :value="{ isTopOffer:true,  id:match.id, oddType: '12', odd: (match.oddValue12* match.topOfferMultiplier).toFixed(2), teamHome: match.teamHome, teamAway: match.teamAway }" :visible="match.oddValue12 === 1" @mousedown="onChangeSpecialOffer($event)" />
                                 {{ (match.oddValue12 * match.topOfferMultiplier).toFixed(2) }}
                             </td>
                         </tr>
@@ -300,7 +300,7 @@
             },
             async submitBets() {
                 if (this.betingAmount <= 0) {
-                    alert("The balance to be added cannot be negative or 0.");
+                    alert("The value bet cannot be negative or 0.");
                     return;
                 }
                 try {

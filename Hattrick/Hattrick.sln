@@ -7,9 +7,15 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hattrick.Server", "Hattrick
 EndProject
 Project("{54A90642-561A-4BB1-A94E-469ADEE60C69}") = "hattrick.client", "hattrick.client\hattrick.client.esproj", "{9C61B7FB-D3E7-4820-A59B-8E2DDE12D309}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hattrick.ServerTests", "Hattrick.ServerTests\Hattrick.ServerTests.csproj", "{27CA4252-0392-477C-B0F1-6B4173177796}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hattrick.ServerTests", "Hattrick.ServerTests\Hattrick.ServerTests.csproj", "{27CA4252-0392-477C-B0F1-6B4173177796}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hattrick.ServiceLayer", "Hattrick.ServiceLayer\Hattrick.ServiceLayer.csproj", "{68D914FC-1AC6-40E7-B6EB-58261B045816}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Frontend", "Frontend", "{9A8767A7-899C-47C3-B784-7A7A6216CA2F}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Backend", "Backend", "{62096203-D5DF-4643-8F25-B4F1EF85B067}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{4EC8C1E1-4585-4AE7-B1D2-9478FB58EE6F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -38,6 +44,12 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{EED1C0C8-302F-44D9-833B-49D132F6356C} = {62096203-D5DF-4643-8F25-B4F1EF85B067}
+		{9C61B7FB-D3E7-4820-A59B-8E2DDE12D309} = {9A8767A7-899C-47C3-B784-7A7A6216CA2F}
+		{27CA4252-0392-477C-B0F1-6B4173177796} = {4EC8C1E1-4585-4AE7-B1D2-9478FB58EE6F}
+		{68D914FC-1AC6-40E7-B6EB-58261B045816} = {62096203-D5DF-4643-8F25-B4F1EF85B067}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {0A4E8BC2-266D-453D-8DF9-573BCCD853F3}

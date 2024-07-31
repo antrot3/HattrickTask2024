@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Hattrick.Server.Models
+namespace Hattrick.ServiceLayer.Models
 {
     public class TicketBetModel
     {

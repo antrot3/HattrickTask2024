@@ -1,9 +1,4 @@
-﻿using Hattrick.Server.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Hattrick.ServiceLayer.Models;
 
 namespace Hattrick.ServerTests
 {
@@ -21,6 +16,7 @@ namespace Hattrick.ServerTests
                 }
             };
         }
+
         public static List<UserModel> GetFakeMatchesList()
         {
             return new List<UserModel>()

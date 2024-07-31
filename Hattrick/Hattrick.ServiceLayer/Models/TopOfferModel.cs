@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
 
-namespace Hattrick.Server.Models
+namespace Hattrick.ServiceLayer.Models
 {
     public class TopOfferModel
     {
