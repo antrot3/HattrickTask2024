@@ -162,7 +162,8 @@
 
         <div class="multiplier-info" v-if="selectedOddsCount > 0">
             <p>Multiplier of selected odds: {{ totalMultiplier.toFixed(2)  }}</p>
-            <input v-model="betingAmount" placeholder="How much do you want to bet" type="number" min="0" value="1" @change="onChange($event)" /> Euros
+            <input v-model="betingAmount" placeholder="How much do you want to bet" type="number" min="0" value="1" /> Euros
+            <p>(More then 2 decimal places will be rounded os submit)</p>
             <p>How much are you bettin after handling costs of 5%: {{ handlingCosts.toFixed(2)  }}</p>
             <p>Pottential Winning (Click to calculate): {{ potentialWinning.toFixed(2)}} Euros</p>
             <button @click="submitBets">Submit Ticket</button>
@@ -225,7 +226,14 @@
                 matchRequst: {},
                 handlingCosts: 0,
                 potentialWinning: 0,
+                betingAmount:0,
             };
+        },
+        watch: {
+            betingAmount(newVal, oldVal) {
+                this.handlingCosts = this.betingAmount * 0.95;
+                this.potentialWinning = this.selectedMatches.reduce((acc, odd) => acc * odd.odd, 1) * this.handlingCosts;
+            },
         },
         computed: {
             groupedMatches(): { [key: string]: Match[] } {
@@ -272,11 +280,6 @@
                     this.toggleIcon = 'See Rules';
                 }
             },
-
-            onChange(event): void {
-                this.handlingCosts = this.betingAmount * 0.95;
-                this.potentialWinning = this.selectedMatches.reduce((acc, odd) => acc * odd.odd, 1) * this.handlingCosts;
-            },
             async fetchData() {
                 this.loading = true;
                 try {
@@ -310,6 +313,7 @@
                 });
             },
             async submitBets() {
+                this.betingAmount = Number(this.betingAmount).toFixed(2)
                 if (this.betingAmount <= 0) {
                     alert("The value bet cannot be negative or 0.");
                     return;
